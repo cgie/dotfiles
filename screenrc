@@ -1,0 +1,9 @@
+# ---------------------------------------------------------------------
+# file:     ~/.screenrc
+# author:   Christian Gießen  http://sainthuck.de
+# modified: September 2010
+# ---------------------------------------------------------------------
+
+defutf8 on
+startup_message off
+source "$SCREEN_CONF_DIR/$SCREEN_CONF"
