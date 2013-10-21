@@ -1,0 +1,5 @@
+startup_message off
+defbce "on" 
+
+screen -t mixer alsamixer
+screen -t bash
