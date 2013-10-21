@@ -76,9 +76,6 @@ function git-latexdiff {
 #prompt_standard
 prompt_colored
 export PATH=$PATH:$HOME/bin:$HOME/.cabal/bin
-export PATH=$PATH:$HOME/adt-bundle-linux-x86_64-20130219/eclipse
-export PATH=$PATH:$HOME/adt-bundle-linux-x86_64-20130219/sdk/platform-tools
-export PATH=$PATH:$HOME/adt-bundle-linux-x86_64-20130219/sdk/tools
 #export HTTP_PROXY="localhost:8123"
 export EDITOR="vim"
 #export DISPLAY=:0

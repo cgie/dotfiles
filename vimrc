@@ -7,7 +7,7 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'command-t'
+Bundle 'wincent/Command-T'
 Bundle 'pbrisbin/vim-runfile'
 
 syntax on
