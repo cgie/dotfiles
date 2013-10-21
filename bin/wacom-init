@@ -1,0 +1,83 @@
+#!/bin/sh
+
+$HOME/bin/wacom-right # initialize the tablet on the right screen
+
+xsetwacom --set "Wacom Bamboo 16FG 4x5 Finger pad" Button 1 "key +ctrl z -ctrl"
+xsetwacom --set "Wacom Bamboo 16FG 4x5 Finger pad" Button 9 "key +ctrl +plus -plus -ctrl"
+xsetwacom --set "Wacom Bamboo 16FG 4x5 Finger pad" Button 8 "key +ctrl +minus -minus -ctrl"
+xsetwacom --set "Wacom Bamboo 16FG 4x5 Finger pad" Button 3 "key +ctrl +y -y -ctrl"
+
+# stylus
+
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "Area" "0 0 14720 9200"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "TabletDebugLevel" "0"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "Suppress" "4"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "RawSample" "2"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "PressureCurve" "0 0 100 100"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "Mode" "Absolute"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "TabletPCButton" "on"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "Touch" "off"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "Gesture" "off"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "ZoomDistance" "0"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "ScrollDistance" "0"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "TapTime" "250"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "Rotate" "none"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "Threshold" "27"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen stylus" "BindToSerial" "0"
+
+# eraser
+
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen eraser" "Area" "0 0 14720 9200"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen eraser" "TabletDebugLevel" "0"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen eraser" "Suppress" "4"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen eraser" "RawSample" "2"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen eraser" "PressureCurve" "5 10 90 95"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen eraser" "Mode" "Absolute"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen eraser" "Touch" "off"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen eraser" "Gesture" "off"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen eraser" "ZoomDistance" "0"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen eraser" "ScrollDistance" "0"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen eraser" "TapTime" "250"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen eraser" "Rotate" "none"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen eraser" "Threshold" "27"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Pen eraser" "BindToSerial" "0"
+
+# touch
+
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger touch" "Area" "0 0 4096 4096"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger touch" "TabletDebugLevel" "0"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger touch" "Suppress" "4"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger touch" "RawSample" "2"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger touch" "PressureCurve" "0 0 100 100"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger touch" "Mode" "Relative"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger touch" "Touch" "off"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger touch" "Gesture" "off"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger touch" "ZoomDistance" "50"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger touch" "ScrollDistance" "20"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger touch" "TapTime" "250"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger touch" "Rotate" "none"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger touch" "Threshold" "27"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger touch" "BindToSerial" "0"
+
+# pad
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "TabletDebugLevel" "0"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "Suppress" "2"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "RawSample" "4"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "Mode" "Absolute"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "Touch" "on"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "Gesture" "off"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "ZoomDistance" "180"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "ScrollDistance" "18"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "TapTime" "220"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "RelWheelUp" "button +5 "
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "RelWheelDown" "+4 "
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "AbsWheelUp" "+4 "
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "AbsWheelDown" "+5 "
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "AbsWheel2Up" "+4 "
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "AbsWheel2Down" "+5 "
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "StripLeftUp" "+4 "
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "StripLeftDown" "+5 "
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "StripRightUp" "+4 "
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "StripRightDown" "+5 "
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "Threshold" "0"
+xsetwacom set "Wacom Bamboo 16FG 4x5 Finger pad" "BindToSerial" "0"
