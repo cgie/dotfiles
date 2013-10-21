@@ -1,11 +1,13 @@
 # ---------------------------------------------------------------------
 # file:     ~/.bashrc
-# author:   Christian Gießen  http://sainthuck.de
-# modified: September 2010
+# author:   Christian Gießen  http://giessen.io
 # ---------------------------------------------------------------------
 
 # Don't parse any further if there's no prompt
 [ -z "$PS1" ] && return
+shopt -s histappend
+shopt -s checkwinsize
+
 
 # ---------------------------------------------------------------------
 # Colors
@@ -22,43 +24,6 @@ hist () {
   history | grep ${1} | uniq --skip-fields=1 | sort -biz | uniq --skip-fields=2
 }
 
-
-# Note taker
-# taken from http://wiki.archlinux.org/index.php/Bashrc_helpers
-note () {
-  [ -f $HOME/.notes ] || touch $HOME/.notes
-  if [ $# = 0 ]
-  then
-    cat $HOME/.notes
-  elif [ $1 = -c ]
-  then
-    > $HOME/.notes
-  else
-    echo "$@" >> $HOME/.notes
-  fi
-}
-
-todo() {
-   test -f $HOME/.todo || touch $HOME/.todo
-   if test $# = 0
-   then 
-           cat $HOME/.todo
-   elif test $1 = -l
-   then
-           cat -n $HOME/.todo
-   elif test $1 = -c
-   then
-           > $HOME/.todo
-   elif test $1 = -r
-   then
-           cat -n $HOME/.todo
-           echo -ne "----------------------------\nType a number to remove: "
-           read NUMBER
-           sed -ie ${NUMBER}d $HOME/.todo
-   else
-           echo $@ >> $HOME/.todo
-   fi
-}
 
 # Standard uncolored prompt: [cgie@talia ~]$
 function prompt_standard () {

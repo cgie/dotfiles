@@ -1,4 +1,15 @@
-execute pathogen#infect()
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+
+Bundle 'gmarik/vundle'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'command-t'
+Bundle 'pbrisbin/vim-runfile'
+
 syntax on
 
 function! MapToggle(key, opt)
@@ -47,17 +58,15 @@ filetype plugin indent on
 
 if $TERM =~ "-256color"
   set t_Co=256
-  let g:zenburn_transparent = 1
-"  colorscheme zenburn
-  set background=dark
   colorscheme solarized
+  set bg=dark
 endif
 
 if has("gui_running")
   set t_Co=256
 "  colorscheme zenburn
-  set background=dark
   colorscheme solarized
+  set bg=dark
   set guifont=Consolas\ 12
   set guioptions=em
 endif
