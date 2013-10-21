@@ -1,0 +1,47 @@
+$include /etc/inputrc
+"\e[A":history-search-backward
+"\e[B":history-search-forward
+
+set show-all-if-ambiguous on
+set visible-stats on
+set match-hidden-files on 
+#set expand-tilde on
+set mark-directories on
+set completion-query-items 200
+set bell-style none
+
+set input-meta on
+set output-meta on
+
+$if Bash
+    Space: magic-space
+$endif
+
+"\C-x\C-o": menu-complete
+"\C-x\C-f": complete-filename
+"\C-x\C-u": complete-username
+"\C-x\C-h": complete-hostname
+
+set bind-tty-special-chars off
+"\C-w": unix-filename-rubout
+
+# mappings for Ctrl-left-arrow and Ctrl-right-arrow for word moving
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+"\e[5C": forward-word
+"\e[5D": backward-word
+"\e\e[C": forward-word
+"\e\e[D": backward-word
+
+# Misc home/end junk
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+"\e[3~": delete-char
+"\e[2~": quoted-insert
+"\e[8~": end-of-line
+"\eOc": forward-word
+"\eOd": backward-word
+"\eOH": beginning-of-line
+"\eOF": end-of-line
+"\e[H": beginning-of-line
+"\e[F": end-of-line
