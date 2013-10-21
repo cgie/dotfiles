@@ -30,7 +30,7 @@ import XMonad.Layout.Reflect
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.ResizableTile
-import XMonad.Util.Scratchpad 
+import XMonad.Util.NamedScratchpad 
 import XMonad.Util.Run
 import XMonad.Layout.Accordion
 import XMonad.Hooks.ManageHelpers
@@ -39,14 +39,24 @@ import XMonad.Actions.SpawnOn
 import XMonad.Layout.LayoutHints
 import XMonad.Actions.CycleWS
 import Data.Char (ord)
+import Data.List (elemIndex)
+import Data.Function (on)
+import XMonad.Util.WorkspaceCompare
 import qualified Solarized.Light as S
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+
+
+scratchpads = [
+  NS "screen" "urxvtcd -name scratchpad -e screen-scratchpad -c ~/.screen/configs/scratchpad -S scratchpad -D -R scratchpad" (title =? "screen-scratchpad") defaultFloating
+  ]
+
 -- main
 main = do
   nScreens <- countScreens
-  handles  <- mapM (spawnPipe . xmobarCommand) [0 .. nScreens-1]
+--  handles  <- mapM (spawnPipe . xmobarCommand) [0 .. nScreens-1]
+  handles <- mapM (spawnPipe . dzenCommand) [1 .. nScreens]
 --  dzen     <- spawnPipe myStatusBar
 --  dzenright <- spawnPipe myStatusBarRight
 --  mpdbar <- spawn myMPDBar
@@ -66,14 +76,14 @@ main = do
     , layoutHook         = myLayouts
     , handleEventHook    = handleEventHook defaultConfig <+> fullscreenEventHook
     , manageHook         = myManageHook <+> manageSpawn <+> manageDocks <+> dynamicMasterHook
---    , logHook            = (dynamicLogWithPP $ myDzenPP dzen) -- >> (fadeInactiveLogHook 0.9)
-    , logHook            = mapM_ dynamicLogWithPP $ zipWith pp handles [0..nScreens]
+    , logHook            = mapM_ dynamicLogWithPP $ zipWith myDzenPP handles [0..nScreens-1] -- >> (fadeInactiveLogHook 0.9)
+--    , logHook            = mapM_ dynamicLogWithPP $ zipWith pp handles [0..nScreens-1]
     , startupHook        = myStartupHook
     }
 --------------------------------------------------------------------------------
 -- Color and font definitions:
 --myFont = "-*-montecarlo-medium-r-normal-*-11-*-*-*-c-*-*-*"
-myFont = "Consolas:pixelsize=15:antialias=true:hinting=true"
+myFont = "inconsolata:pixelsize=18:antialias=true:hinting=true"
 myIconDir = "/home/cgie/usr/share/dzen_bitmaps"
 --myDzenFGColor = "#dcdccc"
 --myDzenBGColor = "#3f3f3f"
@@ -157,7 +167,13 @@ xmobarCommand (S s) = unwords ["xmobar", "-x", show s, "-t", template s] where
     template 1 = "%StdinReader%"
     template _ = "%date%%StdinReader%"
 
---myStatusBar = "dzen2 -x '0' -y '0' -h '18' -w '3000' -ta 'l' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "'"
+--dzenCommand (S s) = unwords ["dzen2 -xs", show s, "-ta l -u"]
+
+dzenCommand (S s) = unwords ["dzen2", "-xs", show s, dconf s] where
+    dconf 1 = "-u -h '18' -ta 'l' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' -u -e 'onstart=lower'" 
+    dconf _ = "-u -h '18' -ta 'l' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' -u -e 'onstart=lower'"
+
+myStatusBar = "dzen2 -x '0' -y '0' -h '18' -w '3000' -ta 'l' -fg '" ++ S.base03 ++ "' -bg '" ++ S.base0 ++ "' -fn '" ++ myFont ++ "'"
 --myStatusBarRight = "dzen2 -xs 2 -x '0' -y '0' -h '18' -w '1920' -ta 'l' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "'"
 --myMPDBar = "/home/cgie/bin/mpdbar | dzen2 -x '1400' -y '1064' -h '21' -w '520' -ta 'l' -sa 'c' -l 3 -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "' -e 'button4=exec:mpc volume +5;button5=exec:mpc volume -5;button1=exec:mpc next;button3=exec:mpc prev;button2=exec:mpc toggle;entertitle=uncollapse;leavetitle=collapse'"
 --myClockBar = "/home/cgie/bin/clockbar | dzen2 -x '0' -y '1064' -h '18' -w '1920' -ta 'l' -fg '" ++ myNormalFGColor ++ "' -bg '" ++ myNormalBGColor ++ "' -fn '" ++ myFont ++ "'"
@@ -187,7 +203,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,               xK_F1        ), spawnHere "urxvtcd -e mutt")
   , ((modMask,               xK_F2        ), spawn "mathematica")
   , ((modMask,               xK_s         ), spawnHere "skippy-xd --activate-window-picker")
-  , ((modMask,               xK_d         ), scratchpadSpawnActionTerminal "urxvtcd -name scratchpad -e screen -c ~/.screen/configs/scratchpad -S scratchpad -D -R scratchpad")
+  , ((modMask,               xK_d         ), namedScratchpadAction scratchpads "screen")
+--  , ((modMask,               xK_d         ), scratchpadSpawnActionTerminal "urxvtcd -name scratchpad -e screen -c ~/.screen/configs/scratchpad -S scratchpad -D -R scratchpad")
   , ((modMask,               xK_F9        ), spawnHere "~/bin/wacom-left")
   , ((modMask,               xK_F10       ), spawnHere "~/bin/wacom-right")
   , ((modMask,               xK_F12       ), spawnHere "~/bin/wacom-init")
@@ -259,19 +276,15 @@ myManageHook = composeAll
   , className =? "gifview"                 --> doFloat
   , className =? "feh"                 --> doFloat
   , className =? "Xmessage"            --> doFloat
-  , className =? "tvbrowser.TVBrowser" --> doF(W.shift "huite")
-  , className =? "Pidgin"              --> doF(W.shift "sept")
-  , className =? "Turpial"              --> doF(W.shift "sept")
-  , className =? "Uzbl-core"           --> doF(W.shift "trois")
   , className =? "XMathematica"           --> doF(W.shift "quatre")
   , className =? "Liferea"           --> doF(W.shift "sept")
   , stringProperty "WM_NAME" =? "Welcome to Wolfram Mathematica 9" --> doFloat
   , resource  =? "desktop_window"      --> doIgnore
   , resource  =? "kdesktop"            --> doIgnore
-  ] <+> manageDocks <+> scratchpadManageHook (W.RationalRect 0.05 0.1115 0.9 0.5)
+  ] <+> manageDocks <+> namedScratchpadManageHook scratchpads -- (W.RationalRect 0.05 0.1115 0.9 0.5)
 -----------------------------------------------------------------------
 -- dynamicLog format for dzen:
-myDzenPP h = defaultPP
+myDzenPP h s = marshallPP s dzenPP 
     { ppCurrent = wrap ("^fg(" ++ myIconFGColor ++ ")^bg(" ++ myFocusedBGColor ++ ")^p()^i(" ++ myIconDir ++ "/has_win.xbm)^fg(" ++ myDzenFGColor ++ ")") "^fg()^bg()^p()" . pad
     , ppVisible = wrap ("^fg(" ++ myNormalFGColor ++ ")^bg(" ++ myNormalBGColor ++ ")^p()^i(" ++ myIconDir ++ "/has_win.xbm)^fg(" ++ myNormalFGColor ++ ")") "^fg()^bg()^p()" . pad
     , ppHidden = wrap ("^fg(" ++ myNormalFGColor ++ ")^bg(" ++ myNormalBGColor ++ ")^p()^i(" ++ myIconDir ++ "/has_win.xbm)^fg(" ++ myNormalFGColor ++ ")") "^fg()^bg()^p()" . pad
@@ -290,23 +303,22 @@ myDzenPP h = defaultPP
         "Hinted IM ReflectX IM ResizableTall" -> "^fg(" ++ myIconFGColor ++ ")^i(" ++ myIconDir ++ "/info_02.xbm)"
         _ -> x
         )
-    , ppSort = fmap (.scratchpadFilterOutWorkspace) $ ppSort defaultPP
+    , ppSort = fmap (. namedScratchpadFilterOutWorkspace) $ (mkWsSort getWsCompare')
+--    , ppSort = mkWsSort getWsCompare'
     , ppOutput = hPutStrLn h
     }
 
-pp h s = marshallPP s xmobarPP 
-    { ppCurrent           = xmobarColor S.red "" . wrap "[" "]"
-    , ppVisible           = xmobarColor S.orange "" . pad
-    , ppHidden            = xmobarColor S.blue "" . pad
-    , ppHiddenNoWindows   = xmobarColor S.base01 "" . pad
-    , ppUrgent            = xmobarColor S.magenta "" . pad
---    , ppWsSep = " :: "
-    , ppTitle = xmobarColor solarizedBase0 "" . wrap "<" ">" . pad
---                . shorten 90
---              . filter (\c -> ord c < 128)
---              . pad
-    , ppSep               = " :: "
-    , ppOrder             = \(wss:layout:title:_) -> [wss, title]
-    , ppOutput            = hPutStrLn h
-    , ppLayout            = xmobarColor S.base0 "" }
+-----------------------------------------------------------------------
+-- This is needed for IndependentScreens which garbles the order of the
+-- workspaces.
+
+getWsIndex' :: X (WorkspaceId -> Maybe Int)
+getWsIndex' = do
+    spaces <- asks (workspaces' . config)
+    return $ flip elemIndex spaces
+
+getWsCompare' :: X WorkspaceCompare
+getWsCompare' = do
+    wsIndex <- getWsIndex'
+    return $ mconcat [compare `on` wsIndex, compare]
 

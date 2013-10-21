@@ -25,4 +25,4 @@ nitrogen --restore &
 xcompmgr &
 sleep 120 && dropboxd &
 
-xmonad
+exec xmonad
