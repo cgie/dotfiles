@@ -19,6 +19,7 @@ import Data.Monoid
 import XMonad.Prompt.AppendFile
 import XMonad.Prompt.Ssh
 import XMonad.Hooks.ManageDocks
+import XMonad.ManageHook
 import qualified XMonad.Actions.Submap as SM
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -48,10 +49,37 @@ import qualified Solarized.Light as S
 --------------------------------------------------------------------------------
 
 
-scratchpads = [
-  NS "screen" "urxvtcd -name scratchpad -e screen-scratchpad -c ~/.screen/configs/scratchpad -S scratchpad -D -R scratchpad" (title =? "screen-scratchpad") defaultFloating
-  ]
+scratchpads = [ NS "screen" spawnScreen findScreen manageScreen
+              , NS "calc"   spawnCalc   findCalc   manageCalc
+              , NS "clock"  spawnClock  findClock  manageClock
+              ]
+  where
+    spawnScreen  = myTerminal ++ " -name scratchpad -e screen -c ~/.screen/configs/scratchpad -S scratchpad -D -R scratchpad screen"
+    findScreen   = resource =? "scratchpad"
+    manageScreen = customFloating $ W.RationalRect l t w h
+      where
+        h = 0.4
+        w = 0.8
+        t = (1 - h) / 2
+        l = (1 - w) / 2
+    
+    spawnCalc  = myTerminal ++ " -name calc -e R --vanilla"
+    findCalc   = resource =? "calc"
+    manageCalc = customFloating $ W.RationalRect l t w h
+      where
+        h = 0.4
+        w = 0.8
+        t = (1 - h) / 2
+        l = (1 - w) / 2
 
+    spawnClock = myTerminal ++ " -name clock -e tty-clock -scC1"
+    findClock = resource =? "clock"
+    manageClock = customFloating $ W.RationalRect l t w h
+      where
+        h = 0.3
+        w = 1
+        t = (1 - h) / 2
+        l = 0
 -- main
 main = do
   nScreens <- countScreens
@@ -202,9 +230,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,               xK_f         ), spawnHere "chromium")
   , ((modMask,               xK_F1        ), spawnHere "urxvtcd -e mutt")
   , ((modMask,               xK_F2        ), spawn "mathematica")
-  , ((modMask,               xK_s         ), spawnHere "skippy-xd --activate-window-picker")
-  , ((modMask,               xK_d         ), namedScratchpadAction scratchpads "screen")
---  , ((modMask,               xK_d         ), scratchpadSpawnActionTerminal "urxvtcd -name scratchpad -e screen -c ~/.screen/configs/scratchpad -S scratchpad -D -R scratchpad")
+  , ((modMask,               xK_adiaeresis), namedScratchpadAction scratchpads "calc")
+  , ((modMask,               xK_udiaeresis), namedScratchpadAction scratchpads "clock")
+  , ((modMask,               xK_odiaeresis), namedScratchpadAction scratchpads "screen")
   , ((modMask,               xK_F9        ), spawnHere "~/bin/wacom-left")
   , ((modMask,               xK_F10       ), spawnHere "~/bin/wacom-right")
   , ((modMask,               xK_F12       ), spawnHere "~/bin/wacom-init")
@@ -281,7 +309,7 @@ myManageHook = composeAll
   , stringProperty "WM_NAME" =? "Welcome to Wolfram Mathematica 9" --> doFloat
   , resource  =? "desktop_window"      --> doIgnore
   , resource  =? "kdesktop"            --> doIgnore
-  ] <+> manageDocks <+> namedScratchpadManageHook scratchpads -- (W.RationalRect 0.05 0.1115 0.9 0.5)
+  ] <+> manageDocks <+> namedScratchpadManageHook scratchpads --(W.RationalRect 0.05 0.1115 0.9 0.5)
 -----------------------------------------------------------------------
 -- dynamicLog format for dzen:
 myDzenPP h s = marshallPP s dzenPP 
