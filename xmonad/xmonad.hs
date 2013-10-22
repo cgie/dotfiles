@@ -9,7 +9,8 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
 import XMonad.Layout.PerWorkspace
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.FadeInactive
+import XMonad.Hooks.FadeInactive (setOpacity)
+import Data.List (isInfixOf, isSuffixOf)
 --import XMonad.Hooks.FadeWindows
 import XMonad.Layout.Circle
 import XMonad.Layout.ToggleLayouts
@@ -45,13 +46,16 @@ import Data.Function (on)
 import XMonad.Util.WorkspaceCompare
 import qualified Solarized.Light as S
 
+
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 
-scratchpads = [ NS "screen" spawnScreen findScreen manageScreen
-              , NS "calc"   spawnCalc   findCalc   manageCalc
-              , NS "clock"  spawnClock  findClock  manageClock
+scratchpads = [ NS "screen"       spawnScreen  findScreen   manageScreen
+              , NS "calc"         spawnCalc    findCalc     manageCalc
+              , NS "clock"        spawnClock   findClock    manageClock
+--              , NS "xournalnotes" spawnXournal findXournal  manageXournal
               ]
   where
     spawnScreen  = myTerminal ++ " -name scratchpad -e screen -c ~/.screen/configs/scratchpad -S scratchpad -D -R scratchpad screen"
@@ -80,6 +84,16 @@ scratchpads = [ NS "screen" spawnScreen findScreen manageScreen
         w = 1
         t = (1 - h) / 2
         l = 0
+
+--    spawnXournal  = "/home/cgie/bin/notexournal /home/cgie/notes.xoj"
+--    findXournal   = resource =? "xournal"
+--    manageXournal = customFloating $ W.RationalRect l t w h
+--      where
+--        h = 0.3
+--        w = 1
+--        t = (1 - h) / 2
+--        l = 0
+
 -- main
 main = do
   nScreens <- countScreens
@@ -233,6 +247,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,               xK_adiaeresis), namedScratchpadAction scratchpads "calc")
   , ((modMask,               xK_udiaeresis), namedScratchpadAction scratchpads "clock")
   , ((modMask,               xK_odiaeresis), namedScratchpadAction scratchpads "screen")
+--  , ((modMask,               xK_numbersign), namedScratchpadAction scratchpads "xournalnotes")
   , ((modMask,               xK_F9        ), spawnHere "~/bin/wacom-left")
   , ((modMask,               xK_F10       ), spawnHere "~/bin/wacom-right")
   , ((modMask,               xK_F12       ), spawnHere "~/bin/wacom-init")
@@ -297,6 +312,8 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
   ]
 -----------------------------------------------------------------------
 -- Window management:
+
+
 myManageHook = composeAll
   [ isFullscreen                       --> doFullFloat
   , className =? "MPlayer"             --> doFloat
@@ -306,10 +323,12 @@ myManageHook = composeAll
   , className =? "Xmessage"            --> doFloat
   , className =? "XMathematica"           --> doF(W.shift "quatre")
   , className =? "Liferea"           --> doF(W.shift "sept")
+--  , className =? "URxvt" --> (ask >>= \w -> liftX (setOpacity w 0.3) >> idHook)
   , stringProperty "WM_NAME" =? "Welcome to Wolfram Mathematica 9" --> doFloat
+--  , fmap (isInfixOf "Xour") (stringProperty "_NET_WM_ICON_NAME") --> (ask >>= \w -> liftX (setOpacity w 0.5) >> idHook)
   , resource  =? "desktop_window"      --> doIgnore
   , resource  =? "kdesktop"            --> doIgnore
-  ] <+> manageDocks <+> namedScratchpadManageHook scratchpads --(W.RationalRect 0.05 0.1115 0.9 0.5)
+  ] <+> manageDocks <+> namedScratchpadManageHook scratchpads 
 -----------------------------------------------------------------------
 -- dynamicLog format for dzen:
 myDzenPP h s = marshallPP s dzenPP 
