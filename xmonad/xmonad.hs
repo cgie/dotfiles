@@ -52,10 +52,10 @@ import qualified Solarized.Light as S
 --------------------------------------------------------------------------------
 
 
-scratchpads = [ NS "screen"       spawnScreen  findScreen   manageScreen
-              , NS "calc"         spawnCalc    findCalc     manageCalc
-              , NS "clock"        spawnClock   findClock    manageClock
---              , NS "xournalnotes" spawnXournal findXournal  manageXournal
+scratchpads = [ NS "screen"   spawnScreen  findScreen   manageScreen
+              , NS "calc"     spawnCalc    findCalc     manageCalc
+              , NS "clock"    spawnClock   findClock    manageClock
+              , NS "scribble" spawnXournal findXournal  manageXournal
               ]
   where
     spawnScreen  = myTerminal ++ " -name scratchpad -e screen -c ~/.screen/configs/scratchpad -S scratchpad -D -R scratchpad screen"
@@ -85,14 +85,15 @@ scratchpads = [ NS "screen"       spawnScreen  findScreen   manageScreen
         t = (1 - h) / 2
         l = 0
 
---    spawnXournal  = "/home/cgie/bin/notexournal /home/cgie/notes.xoj"
---    findXournal   = resource =? "xournal"
---    manageXournal = customFloating $ W.RationalRect l t w h
---      where
---        h = 0.3
---        w = 1
---        t = (1 - h) / 2
---        l = 0
+    spawnXournal  = "xournal -e scribble /home/cgie/notes.xoj"
+    findXournal   = role =? "scribble"
+      where role = stringProperty "WM_WINDOW_ROLE"
+    manageXournal = customFloating $ W.RationalRect l t w h
+      where
+        h = 0.8
+        w = 0.8
+        t = (1 - h) / 2
+        l = (1 - w) / 2
 
 -- main
 main = do
@@ -117,7 +118,7 @@ main = do
     , mouseBindings      = myMouseBindings
     , layoutHook         = myLayouts
     , handleEventHook    = handleEventHook defaultConfig <+> fullscreenEventHook
-    , manageHook         = myManageHook <+> manageSpawn <+> manageDocks <+> dynamicMasterHook
+    , manageHook         = myManageHook  <+> manageSpawn <+> manageDocks <+> dynamicMasterHook
     , logHook            = mapM_ dynamicLogWithPP $ zipWith myDzenPP handles [0..nScreens-1] -- >> (fadeInactiveLogHook 0.9)
 --    , logHook            = mapM_ dynamicLogWithPP $ zipWith pp handles [0..nScreens-1]
     , startupHook        = myStartupHook
@@ -247,7 +248,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,               xK_adiaeresis), namedScratchpadAction scratchpads "calc")
   , ((modMask,               xK_udiaeresis), namedScratchpadAction scratchpads "clock")
   , ((modMask,               xK_odiaeresis), namedScratchpadAction scratchpads "screen")
---  , ((modMask,               xK_numbersign), namedScratchpadAction scratchpads "xournalnotes")
+  , ((modMask,               xK_numbersign), namedScratchpadAction scratchpads "scribble")
   , ((modMask,               xK_F9        ), spawnHere "~/bin/wacom-left")
   , ((modMask,               xK_F10       ), spawnHere "~/bin/wacom-right")
   , ((modMask,               xK_F12       ), spawnHere "~/bin/wacom-init")
@@ -314,21 +315,21 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- Window management:
 
 
-myManageHook = composeAll
+myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
   [ isFullscreen                       --> doFullFloat
+--  , (stringProperty "WM_WINDOW_ROLE") `isSuffixOf` "scribble" --> doFullFloat
+  , fmap (isInfixOf "scribble") (stringProperty "WM_WINDOW_ROLE") --> doFloat
   , className =? "MPlayer"             --> doFloat
   , className =? "Gimp"                --> doFloat
-  , className =? "gifview"                 --> doFloat
   , className =? "feh"                 --> doFloat
-  , className =? "Xmessage"            --> doFloat
-  , className =? "XMathematica"           --> doF(W.shift "quatre")
-  , className =? "Liferea"           --> doF(W.shift "sept")
---  , className =? "URxvt" --> (ask >>= \w -> liftX (setOpacity w 0.3) >> idHook)
-  , stringProperty "WM_NAME" =? "Welcome to Wolfram Mathematica 9" --> doFloat
---  , fmap (isInfixOf "Xour") (stringProperty "_NET_WM_ICON_NAME") --> (ask >>= \w -> liftX (setOpacity w 0.5) >> idHook)
+  , className =? "Xmessage"            --> doCenterFloat
+  , className =? "XMathematica"        --> doF (W.shift "quatre")
+  , className =? "Liferea"             --> doF (W.shift "sept")
+--  , (stringProperty "WM_WINDOW_ROLE" =? "scribble"
+--    --> (ask >>= \w -> liftX (setOpacity w 0.5) >> idHook))
   , resource  =? "desktop_window"      --> doIgnore
   , resource  =? "kdesktop"            --> doIgnore
-  ] <+> manageDocks <+> namedScratchpadManageHook scratchpads 
+  ]
 -----------------------------------------------------------------------
 -- dynamicLog format for dzen:
 myDzenPP h s = marshallPP s dzenPP 
