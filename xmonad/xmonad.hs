@@ -85,13 +85,13 @@ scratchpads = [ NS "screen"   spawnScreen  findScreen   manageScreen
         t = (1 - h) / 2
         l = 0
 
-    spawnXournal  = "xournal -e scribble /home/cgie/notes.xoj"
+    spawnXournal  = "xournal --role scribble /home/cgie/notes.xoj"
     findXournal   = role =? "scribble"
       where role = stringProperty "WM_WINDOW_ROLE"
     manageXournal = customFloating $ W.RationalRect l t w h
       where
-        h = 0.8
-        w = 0.8
+        h = 1
+        w = 1
         t = (1 - h) / 2
         l = (1 - w) / 2
 
@@ -120,7 +120,6 @@ main = do
     , handleEventHook    = handleEventHook defaultConfig <+> fullscreenEventHook
     , manageHook         = myManageHook  <+> manageSpawn <+> manageDocks <+> dynamicMasterHook
     , logHook            = mapM_ dynamicLogWithPP $ zipWith myDzenPP handles [0..nScreens-1] -- >> (fadeInactiveLogHook 0.9)
---    , logHook            = mapM_ dynamicLogWithPP $ zipWith pp handles [0..nScreens-1]
     , startupHook        = myStartupHook
     }
 --------------------------------------------------------------------------------
@@ -206,9 +205,9 @@ myTheme = defaultTheme
   }
 -----------------------------------------------------------------------
 -- Status bar options:
-xmobarCommand (S s) = unwords ["xmobar", "-x", show s, "-t", template s] where
-    template 1 = "%StdinReader%"
-    template _ = "%date%%StdinReader%"
+--xmobarCommand (S s) = unwords ["xmobar", "-x", show s, "-t", template s] where
+--    template 1 = "%StdinReader%"
+--   template _ = "%date%%StdinReader%"
 
 --dzenCommand (S s) = unwords ["dzen2 -xs", show s, "-ta l -u"]
 
@@ -317,16 +316,14 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 
 myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
   [ isFullscreen                       --> doFullFloat
---  , (stringProperty "WM_WINDOW_ROLE") `isSuffixOf` "scribble" --> doFullFloat
-  , fmap (isInfixOf "scribble") (stringProperty "WM_WINDOW_ROLE") --> doFloat
   , className =? "MPlayer"             --> doFloat
   , className =? "Gimp"                --> doFloat
   , className =? "feh"                 --> doFloat
   , className =? "Xmessage"            --> doCenterFloat
   , className =? "XMathematica"        --> doF (W.shift "quatre")
   , className =? "Liferea"             --> doF (W.shift "sept")
---  , (stringProperty "WM_WINDOW_ROLE" =? "scribble"
---    --> (ask >>= \w -> liftX (setOpacity w 0.5) >> idHook))
+  , (stringProperty "WM_WINDOW_ROLE" =? "scribble"
+    --> (ask >>= \w -> liftX (setOpacity w 0.7) >> idHook))
   , resource  =? "desktop_window"      --> doIgnore
   , resource  =? "kdesktop"            --> doIgnore
   ]
