@@ -28,12 +28,6 @@ MapToggle <F7> hlsearch
 MapToggle <F8> paste
 MapToggle <F9> wrap
 
-" Switch to alternate file
-map <C-k> <C-w><Up>
-map <C-j> <C-w><Down>
-map <C-l> <C-w><Right>
-map <C-h> <C-w><Left>
-
 let mapleader=","
 let &colorcolumn=join(range(81,999),",")
 
