@@ -9,6 +9,8 @@ Bundle 'gmarik/vundle'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'wincent/Command-T'
 Bundle 'pbrisbin/vim-runfile'
+Bundle 'bling/vim-airline'
+Bundle 'tpope/vim-fugitive'
 
 syntax on
 
@@ -74,4 +76,6 @@ let g:runfile_by_type = {
 
 nnoremap         ,b   :CommandTBuffer<CR>
 
-
+let g:airline_powerline_fonts = 1
+let g:airline_theme = "solarized"
+set laststatus=2
