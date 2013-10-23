@@ -212,6 +212,7 @@ myDzenPP h s = namedScratchpadFilterOutWorkspacePP $ marshallPP s dzenPP
   , ppWsSep           = ""
   , ppSep             = "  "
   , ppOutput          = hPutStrLn h
+  , ppSort            = fmap (. namedScratchpadFilterOutWorkspace) $ (mkWsSort getWsCompare')
   }
 -------------------------------------------------------------------------
 ---- This is needed for IndependentScreens which garbles the order of the
