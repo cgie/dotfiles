@@ -49,25 +49,6 @@ function channel {
     mplayer dvb://"$1"
 }
 
-function git-latexdiff {    
-    if [[ $# != 2 ]];    
-    then      
-        printf "\tusage: git-latexdiff <file> <back-revision>  \n";    
-    elif [[ $2 -lt 0 ]];     
-    then     
-        printf "\t<Back-revision> must be positive\n";   
-    else      
-        dire=$(dirname $PWD/$1);      
-        based=$(git rev-parse --show-toplevel);      
-        git show HEAD~$2:$(echo $dire| sed 's!'$(echo $based)'/!!')/$1 > $1_diff.tmp;      
-        latexdiff $1 $1_diff.tmp > $1_diff.tex;      
-        pdflatex $1_diff.tex;     
-        zathura $1_diff.pdf;      
-        rm $1_diff*;   
-    fi; 
-}
-
-
 # ---------------------------------------------------------------------
 # Exports, variables and settings
 # ---------------------------------------------------------------------
