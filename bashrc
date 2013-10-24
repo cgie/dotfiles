@@ -8,12 +8,13 @@
 shopt -s histappend
 shopt -s checkwinsize
 
+TERM=xterm-256color
 
 # ---------------------------------------------------------------------
 # Colors
 # ---------------------------------------------------------------------
 
-source $HOME/.bash_colors
+#source $HOME/.bash_colors
 #source $HOME/bin/.git-completion.bash
 
 # ---------------------------------------------------------------------
@@ -58,7 +59,7 @@ function channel {
 prompt_colored
 export PATH=$PATH:$HOME/bin:$HOME/.cabal/bin
 #export HTTP_PROXY="localhost:8123"
-export EDITOR="vim"
+export EDITOR="gvim"
 #export DISPLAY=:0
 export SVN_SSH="ssh -q gauss.informatik.uni-kiel.de ssh"
 export HISTCONTROL=ignoreboth # don't show duplicate lines in history
@@ -72,13 +73,13 @@ export OOO_FORCE_DESKTOP=gnome # for openoffice
 export MOZ_DISABLE_PANGO=1
 export SCREEN_CONF_DIR="$HOME/.screen/configs"
 export SCREEN_CONF="main"
-export LESS_TERMCAP_mb=$red    # begin blinking
-export LESS_TERMCAP_md=$BLUE   # begin bold
-export LESS_TERMCAP_me=$NC     # end mode
-export LESS_TERMCAP_se=$NC     # end standout-mode
-export LESS_TERMCAP_so=$green  # begin standout-mode - info box
-export LESS_TERMCAP_ue=$NC     # end underline
-export LESS_TERMCAP_us=$yellow # begin underline
+#export LESS_TERMCAP_mb=$red    # begin blinking
+#export LESS_TERMCAP_md=$BLUE   # begin bold
+#export LESS_TERMCAP_me=$NC     # end mode
+#export LESS_TERMCAP_se=$NC     # end standout-mode
+#export LESS_TERMCAP_so=$green  # begin standout-mode - info box
+#export LESS_TERMCAP_ue=$NC     # end underline
+#export LESS_TERMCAP_us=$yellow # begin underline
 
 #source /etc/profile.d/apache-ant.sh
 
@@ -105,6 +106,7 @@ alias tgz='tar -pczf'
 alias tbz2='tar -pcjf'
 alias txz='tar -pcJf'
 alias printkreide='lp -dkreide -h134.245.248.204'
+alias vim='gvim'
 
 # ---------------------------------------------------------------------
 # Pseudo Login Manager

@@ -57,6 +57,7 @@ set nofoldenable
 highlight Comment cterm=italic
 filetype plugin indent on
 
+
 if $TERM =~ "-256color"
   set t_Co=256
   colorscheme solarized
@@ -68,7 +69,7 @@ if has("gui_running")
   colorscheme solarized
   let &background = readfile('/home/cgie/.solarizedstatus', '', 1)[0]
   set guifont=Inconsolata\ for\ Powerline\ 12
-  set guioptions=em
+  set guioptions=e
 endif
 
 
