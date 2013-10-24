@@ -30,13 +30,18 @@ MapToggle <F7> hlsearch
 MapToggle <F8> paste
 MapToggle <F9> wrap
 
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 let mapleader=","
 let &colorcolumn=join(range(81,999),",")
 
 set mouse=a
 set tabstop=2
 set shiftwidth=2
-set expandtab 
+set expandtab
 set pastetoggle=<F8>
 set number
 set encoding=utf-8
@@ -55,15 +60,14 @@ filetype plugin indent on
 if $TERM =~ "-256color"
   set t_Co=256
   colorscheme solarized
-  set bg=dark
+  let &background = readfile('/home/cgie/.solarizedstatus', '', 1)[0]
 endif
 
 if has("gui_running")
   set t_Co=256
-"  colorscheme zenburn
   colorscheme solarized
-  set bg=dark
-  set guifont=Consolas\ 12
+  let &background = readfile('/home/cgie/.solarizedstatus', '', 1)[0]
+  set guifont=Inconsolata\ for\ Powerline\ 12
   set guioptions=em
 endif
 
@@ -79,3 +83,5 @@ nnoremap         ,b   :CommandTBuffer<CR>
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "solarized"
 set laststatus=2
+
+set ttimeoutlen=50
