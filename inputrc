@@ -1,17 +1,18 @@
-#include/etc/inputrc
+$include /etc/inputrc
+
 "\e[A":history-search-backward
 "\e[B":history-search-forward
 
-setshow-all-if-ambiguous on
-setvisible-stats on
-setmatch-hidden-files on
-#setexpand-tilde on
-setmark-directories on
-setcompletion-query-items 200
-setbell-style none
+set show-all-if-ambiguous on
+set visible-stats on
+set match-hidden-files on
+set expand-tilde on
+set mark-directories on
+set completion-query-items 200
+set bell-style none
 
-setinput-meta on
-setoutput-meta on
+set input-meta on
+set output-meta on
 
 $if Bash
   Space: magic-space
@@ -22,7 +23,7 @@ $endif
 "\C-x\C-u":complete-username
 "\C-x\C-h":complete-hostname
 
-setbind-tty-special-chars off
+set bind-tty-special-chars off
 "\C-w":unix-filename-rubout
 
 #mappings for Ctrl-left-arrow and Ctrl-right-arrow for word moving
