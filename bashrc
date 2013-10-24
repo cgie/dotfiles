@@ -59,7 +59,7 @@ function channel {
 prompt_colored
 export PATH=$PATH:$HOME/bin:$HOME/.cabal/bin
 #export HTTP_PROXY="localhost:8123"
-export EDITOR="gvim"
+export EDITOR="vim"
 #export DISPLAY=:0
 export SVN_SSH="ssh -q gauss.informatik.uni-kiel.de ssh"
 export HISTCONTROL=ignoreboth # don't show duplicate lines in history
@@ -106,7 +106,6 @@ alias tgz='tar -pczf'
 alias tbz2='tar -pcjf'
 alias txz='tar -pcJf'
 alias printkreide='lp -dkreide -h134.245.248.204'
-alias vim='gvim'
 
 # ---------------------------------------------------------------------
 # Pseudo Login Manager

@@ -74,7 +74,7 @@ scratchpads = [ NS "screen"   spawnScreen  findScreen   manageScreen
 -- Appeareance and standard definitions:
 myFont = "inconsolata:pixelsize=18:antialias=true:hinting=true"
 myIconDir = "/home/cgie/usr/share/dzen_bitmaps"
-myTerminal           = "urxvtcd"
+myTerminal           = "urxvt"
 myFocusFollowsMouse  = True
 myBorderWidth        = 4
 myModMask            = mod4Mask
@@ -115,9 +115,9 @@ myLayouts = avoidStruts $ smartBorders $ tiled ||| Mirror tiled ||| Full
 -- Keybindings:
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
-  [ ((modMask              , xK_r         ), spawn "urxvtcd")
+  [ ((modMask              , xK_r         ), spawn "urxvt")
   , ((modMask,               xK_f         ), spawn "chromium")
-  , ((modMask,               xK_F1        ), spawn "urxvtcd -e mutt")
+  , ((modMask,               xK_F1        ), spawn "urxvt -e mutt")
   , ((modMask,               xK_F2        ), spawn "mathematica")
   , ((modMask,               xK_adiaeresis), namedScratchpadAction scratchpads "calc")
   , ((modMask,               xK_udiaeresis), namedScratchpadAction scratchpads "clock")
