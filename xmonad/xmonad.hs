@@ -8,7 +8,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.FadeInactive (setOpacity)
 import XMonad.Prompt
-import XMonad.Prompt.Shell   
+import XMonad.Prompt.Shell
 import Data.Monoid
 import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
@@ -17,7 +17,7 @@ import XMonad.Layout.IndependentScreens
 import Data.Ratio ((%))
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.ResizableTile
-import XMonad.Util.NamedScratchpad 
+import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run
 import XMonad.Hooks.ManageHelpers
 import Data.List (elemIndex)
@@ -41,7 +41,7 @@ scratchpads = [ NS "screen"   spawnScreen  findScreen   manageScreen
         w = 0.8
         t = (1 - h) / 2
         l = (1 - w) / 2
-    
+
     spawnCalc  = myTerminal ++ " -name calc -e R --vanilla"
     findCalc   = resource =? "calc"
     manageCalc = customFloating $ W.RationalRect l t w h
@@ -93,12 +93,12 @@ myXPConfig = defaultXPConfig
   }
 -----------------------------------------------------------------------
 -- Status bar options:
--- Too complex, but I'll change the left one some day anyway... 
+-- Too complex, but I'll change the left one some day anyway...
 
 dzenCommand (S s) = unwords ["dzen2", "-p", "-xs", show s, dconf s]
   where dconf 1 = "-u -h '18' -ta 'l' -fg '" ++ S.base0 ++ "' -bg '"
-                  ++ S.base03 ++ "' -fn '" ++ myFont 
-                  ++ "' -u -e 'onstart=lower'" 
+                  ++ S.base03 ++ "' -fn '" ++ myFont
+                  ++ "' -u -e 'onstart=lower'"
         dconf _ = "-u -h '18' -ta 'l' -fg '" ++ S.base0 ++ "' -bg '"
                   ++ S.base03 ++ "' -fn '" ++ myFont
                   ++ "' -u -e 'onstart=lower'"
@@ -194,8 +194,10 @@ myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
   , className =? "Xmessage"            --> doCenterFloat
   , className =? "XMathematica"        --> doF (W.shift "quatre")
   , className =? "Liferea"             --> doF (W.shift "sept")
-  , (stringProperty "WM_WINDOW_ROLE" =? "scribble"
-    --> (ask >>= \w -> liftX (setOpacity w 0.7) >> idHook))
+  , className =? "URxvt"
+    --> (ask >>= \w -> liftX (setOpacity w 0.90) >> idHook)
+  , stringProperty "WM_WINDOW_ROLE" =? "scribble"
+    --> (ask >>= \w -> liftX (setOpacity w 0.8) >> idHook)
   , resource  =? "desktop_window"      --> doIgnore
   , resource  =? "kdesktop"            --> doIgnore
   ]
@@ -203,12 +205,12 @@ myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
 -- dynamicLog format for dzen:
 
 myDzenPP h s = namedScratchpadFilterOutWorkspacePP $ marshallPP s dzenPP
-  { ppCurrent         = dzenColor S.base03 S.base00. pad 
-  , ppHidden          = dzenColor S.base2 "" . pad 
-  , ppHiddenNoWindows = dzenColor S.base1 "" . pad 
-  , ppLayout          = dzenColor S.base2 "" . pad 
+  { ppCurrent         = dzenColor S.base03 S.base00. pad
+  , ppHidden          = dzenColor S.base2 "" . pad
+  , ppHiddenNoWindows = dzenColor S.base1 "" . pad
+  , ppLayout          = dzenColor S.base2 "" . pad
   , ppUrgent          = dzenColor S.red "" . pad . dzenStrip
-  , ppTitle           = shorten 100  
+  , ppTitle           = shorten 100
   , ppWsSep           = ""
   , ppSep             = "  "
   , ppOutput          = hPutStrLn h
