@@ -48,7 +48,8 @@ set number
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings="us-ascii:iso-8859-15:utf-8"
-set spelllang=de
+" requires vim-spell-de
+set spelllang=de,en
 set cursorline
 set hlsearch
 set lazyredraw
