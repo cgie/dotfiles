@@ -105,7 +105,7 @@ alias update='yaourt -Syu --aur --no-confirm'
 alias tgz='tar -pczf'
 alias tbz2='tar -pcjf'
 alias txz='tar -pcJf'
-alias printkreide='lp -dkreide -h134.245.248.204'
+alias git='hub'
 
 # ---------------------------------------------------------------------
 # Pseudo Login Manager
