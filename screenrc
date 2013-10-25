@@ -4,6 +4,9 @@
 # ---------------------------------------------------------------------
 
 term screen-256color
+hardstatus alwayslastline '%{= kK} %{= G}[%{= W}%H%{= G}] %= %{= K}%-w%{= G}[%{= W}%n %t%{= G}]%{= K}%+w '
 defutf8 on
+sorendition '= W'
 startup_message off
+bell_msg '^GBell in window %n'
 source "$SCREEN_CONF_DIR/$SCREEN_CONF"
