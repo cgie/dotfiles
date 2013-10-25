@@ -134,6 +134,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask              , xK_x         ), shellPrompt myXPConfig)
   , ((modMask              , xK_q         ), kill)
   , ((modMask .|. shiftMask, xK_BackSpace ), io exitSuccess)
+  , ((modMask,               xK_s         ), spawn "/home/cgie/bin/solarizedtoggle")
   , ((modMask,               xK_t         ), withFocused $ windows . W.sink)
   , ((modMask .|. shiftMask, xK_a         ), setLayout $ XMonad.layoutHook conf)
   , ((modMask,               xK_a         ), sendMessage NextLayout)
