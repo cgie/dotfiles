@@ -3,3 +3,4 @@ xmonad/xmonad-i386-linux
 xmonad/xmonad.errors
 xmonad/xmonad.o
 *.swp
+*.swr
