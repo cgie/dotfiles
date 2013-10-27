@@ -62,14 +62,14 @@ filetype plugin indent on
 
 if $TERM =~ "-256color"
   set t_Co=256
-  colorscheme solarized
   let &background = readfile('/home/cgie/.solarizedstatus', '', 1)[0]
+  colorscheme solarized
 endif
 
 if has("gui_running")
   set t_Co=256
-  colorscheme solarized
   let &background = readfile('/home/cgie/.solarizedstatus', '', 1)[0]
+  colorscheme solarized
   set guifont=Inconsolata\ for\ Powerline\ 12
   set guioptions=e
 endif
