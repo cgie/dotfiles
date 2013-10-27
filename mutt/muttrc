@@ -1,1 +1,179 @@
-/home/cgie/dotfiles/mutt/muttrc
+# ------------------------------------------------------------------------------
+# vim: ft=muttrc:
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Main options
+# ------------------------------------------------------------------------------
+
+set rfc2047_parameters # decode stuff like =?iso-8859-1?Q?file=5F=E4=5F991116=2Ezip?=
+set config_charset="utf-8"
+set charset="utf-8"
+set locale=`echo "${LC_ALL:-${LC_TIME:-${LANG}}}"`
+set attach_charset="us-ascii:iso-8859-15:utf-8"
+set send_charset="us-ascii:iso-8859-15:utf-8"
+
+set mbox_type     = Maildir           # mailbox type
+set sendmail      = /usr/bin/msmtp
+set folder        = ~/Mail/Gmail      # mailbox location
+set spoolfile     = +INBOX            # new mails go here
+set mbox        = "+[Gmail]/All Mail"
+set postponed   = "+[Gmail]/Drafts"
+unset record
+set imap_delim_chars='/'
+
+mailboxes +INBOX
+
+
+# ------------------------------------------------------------------------------
+# Directories and external programs
+# ------------------------------------------------------------------------------
+
+set editor           = "/usr/bin/vim -c 'set tw=65 | normal +}jo'"  # use vim
+set use_from
+set from = cgie@informatik.uni-kiel.de
+set realname = "Christian Gießen"
+set reply_self # for testing purposes
+set metoo
+
+# ------------------------------------------------------------------------------
+# Contacts
+# ------------------------------------------------------------------------------
+
+set query_command="goobook query '%s'"
+
+bind editor \t complete-query
+
+macro index,pager a \
+  "<pipe-message>goobook add<return>" \
+  "add sender to google contacts"
+
+macro index,pager gr \
+  "!goobook reload\n" \
+  "Goobook reload"
+
+# ------------------------------------------------------------------------------
+# Format Options
+# ------------------------------------------------------------------------------
+
+set date_format = "[%a, %F, %T]"
+set index_format = "%3C [%Z] %D %-15.15n %s"
+set status_format = "-%r- %v ---[ Folder: %f, Msgs: %m%?n? New: %n?%?d? Del: %d?%?t? Tag: %t?%?l? %l? ]%?p?---- .: %p waiting to send :. ?--%>- (%P) ---"
+set alias_format = "%4n %t %-20a%r"
+
+# ------------------------------------------------------------------------------
+# Index options
+# ------------------------------------------------------------------------------
+
+set sort      = threads   # sort by threads...
+set sort_aux  = reverse-last-date-received # ... then by date
+
+# ------------------------------------------------------------------------------
+# Pager
+# ------------------------------------------------------------------------------
+
+set pager_index_lines = 8             # number of index lines above the mail content
+set pager_context     = 5              # keep 5 lines when scrolling pages
+set pager_stop                         # don't move to the next message by scrolling
+set menu_scroll
+alternative_order text/plain text/html # priority: plain first, then html
+set smart_wrap                         # no word splitting
+set tilde                              # vim style EOF tilde
+#auto_view text/html                    # view html emails
+#auto_view text/plain                   # view html emails
+unset markers
+#set display_filter = "par gqr"
+
+# ------------------------------------------------------------------------------
+# Composing options
+# ------------------------------------------------------------------------------
+
+set fcc_attach
+set envelope_from              # use From: to derive the sender
+set edit_headers               # show header during composition
+unset mime_forward             # inline forwarding
+set mime_forward_rest
+set forward_decode             # convert the forwarded email to plaintext
+set forward_format = "Fwd: %s" # forward subject
+set fast_reply                 # directly skip to compose
+set reply_to                   # reply to Reply to: field
+set reverse_name               # reply as whomever it was to
+set reverse_realname           # reply as whomever it was to
+set include                    # include message in replies
+set forward_quote              # include message in forwards
+
+# ------------------------------------------------------------------------------
+# Header options
+# ------------------------------------------------------------------------------
+
+ignore *                               # ignore all headers
+unignore from: to: cc: date: subject:  # show only these
+hdr_order from: to: cc: date: subject: # and in this order
+
+# ------------------------------------------------------------------------------
+# Bindings and macros
+# ------------------------------------------------------------------------------
+
+bind  pager       <up>   previous-line
+bind  pager       <down> next-line
+bind  pager       q      exit
+macro index,pager b      '<enter-command>toggle sidebar_visible<enter><refresh>' "Toggle sidebar visibility"
+macro index,pager I      "<change-folder>!<enter>"                               "go to Inbox"
+macro index       \Cr    "<tag-pattern>~N\n<tag-prefix><clear-flag>N"            "Mark all new messages as read"
+
+bind editor <space> noop
+
+macro index \Cr \
+    "<tag-pattern>all<enter><tag-prefix><clear-flag>N<untag-pattern>all<enter>" \
+    "mark all as read"
+
+macro index,pager y \
+    "<save-message>+[Gmail].All Mail<enter><enter>" \
+    "archive the message"
+
+macro index,pager d \
+    "<save-message>+[Gmail].Trash<enter><enter>" \
+    "move message to trash"
+
+macro index s \
+    "<save-message>+[Gmail].Spam<enter>" \
+    "mark message as spam"
+
+macro index,pager +  \
+    <save-message>+[Gmail].Important<enter><enter> \
+    "Mark as important"
+
+macro index gi "<change-folder>+INBOX<enter>" "Go to inbox"
+macro index ga "<change-folder>+[Gmail].All Mail<enter>" "Go to all mail"
+macro index gs "<change-folder>+[Gmail].Starred<enter>" "Go to starred messages"
+macro index gd "<change-folder>+[Gmail].Drafts<enter>" "Go to drafts"
+
+
+# ------------------------------------------------------------------------------
+# GPG Options
+# ------------------------------------------------------------------------------
+
+set pgp_verify_sig = yes
+set pgp_decode_command="gpg --charset utf-8 --status-fd=2 %?p?--passphrase-fd 0? --no-verbose --quiet --batch --output - %f" # decode application/pgp
+set pgp_verify_command="gpg --charset utf-8 --status-fd=2 --no-verbose --quiet --batch --output - --verify %s %f" # verify a pgp/mime signature
+set pgp_decrypt_command="gpg --charset utf-8 --status-fd=2 %?p?--passphrase-fd 0? --no-verbose --quiet --batch --output - %f" # decrypt a pgp/mime attachment
+set pgp_sign_command="gpg --charset utf-8 --no-verbose --batch --quiet --output - %?p?--passphrase-fd 0? --armor --detach-sign --textmode %?a?-u %a? %f" # create a pgp/mime signed attachment
+set pgp_clearsign_command="gpg --charset utf-8 --no-verbose --batch --quiet --output - %?p?--passphrase-fd 0? --armor --textmode --clearsign %?a?-u %a? %f" # create a application/pgp signed (old-style) message
+set pgp_encrypt_only_command="pgpewrap gpg --charset utf-8 --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust -- -r %r -- %f" # create a pgp/mime encrypted attachment
+set pgp_encrypt_sign_command="pgpewrap gpg --charset utf-8 %?p?--passphrase-fd 0? --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust -- -r %r -- %f" # create a pgp/mime encrypted and signed attachment
+set pgp_import_command="gpg --charset utf-8 --no-verbose --import %f" # import a key into the public key ring
+set pgp_export_command="gpg --charset utf-8 --no-verbose --export --armor %r" # export a key from the public key ring
+set pgp_verify_key_command="gpg --charset utf-8 --verbose --batch --fingerprint --check-sigs %r" # verify a key
+set pgp_list_pubring_command="gpg --charset utf-8 --no-verbose --batch --quiet --with-colons --list-keys %r" # read in the public key ring
+set pgp_list_secring_command="gpg --charset utf-8 --no-verbose --batch --quiet --with-colons --list-secret-keys %r" # read in the secret key ring
+set pgp_good_sign="^\\[GNUPG:\\] GOODSIG"
+set pgp_replyencrypt = yes
+set pgp_replysign = yes
+set pgp_replysignencrypted = yes
+set pgp_autosign
+
+# ------------------------------------------------------------------------------
+# Color settings
+# ------------------------------------------------------------------------------
+#
+source /usr/share/doc/mutt/colors/solarized/mutt-colors-solarized-light-16.muttrc
