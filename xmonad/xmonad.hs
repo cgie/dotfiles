@@ -51,7 +51,7 @@ scratchpads = [ NS "screen"   spawnScreen  findScreen   manageScreen
         t = (1 - h) / 2
         l = (1 - w) / 2
 
-    spawnClock = myTerminal ++ " -name clock -e tty-clock -scC1"
+    spawnClock = myTerminal ++ " -name clock -e /usr/local/bin/tty-clock -scC4 -f '%c'"
     findClock = resource =? "clock"
     manageClock = customFloating $ W.RationalRect l t w h
       where
