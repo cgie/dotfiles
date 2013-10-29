@@ -17,8 +17,8 @@ set mbox_type     = Maildir           # mailbox type
 set sendmail      = /usr/bin/msmtp
 set folder        = ~/Mail/Gmail      # mailbox location
 set spoolfile     = +INBOX            # new mails go here
-set mbox        = "+[Gmail]/All Mail"
-set postponed   = "+[Gmail]/Drafts"
+set mbox        = "+[Gmail].All Mail"
+set postponed   = "+[Gmail].Drafts"
 unset record
 set imap_delim_chars='/'
 
