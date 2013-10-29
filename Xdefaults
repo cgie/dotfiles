@@ -55,3 +55,6 @@ URxvt*scrollWithBuffer: true
 URxvt*keysym.Home: \033[1~
 URxvt*keysym.End: \033[4~
 
+URxvt.colorIT:      S_green
+URxvt.colorBD:      S_yellow
+URxvt.colorUL:      S_blue
