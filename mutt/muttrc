@@ -55,17 +55,18 @@ macro index,pager gr \
   "Goobook reload"
 
 macro index ,s \
-  "<shell-escape>notmuch-mutt --prompt search<enter><change-folder-readonly>~/.cache/notmuch/mutt/results<enter>" \
-  "search mail via notmuch"
+  "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+  <shell-escape>notmuch-mutt -r --prompt search<enter>\
+  <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+  <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+  "notmuch: search mail"
 
 # ------------------------------------------------------------------------------
 # Format Options
 # ------------------------------------------------------------------------------
 
 set date_format = "[%a, %F, %T]"
-#set index_format = "%3C [%Z] %D %-15.15n %s"
-set index_format      = "%3C %Z %[!%m/%d] %-17.17F %s"
-#
+set index_format = "%3C [%Z] %D %-15.15n %s"
 set status_format = "-%r- %v ---[ Folder: %f, Msgs: %m%?n? New: %n?%?d? Del: %d?%?t? Tag: %t?%?l? %l? ]%?p?---- .: %p waiting to send :. ?--%>- (%P) ---"
 set alias_format = "%4n %t %-20a%r"
 
