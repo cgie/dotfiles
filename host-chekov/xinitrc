@@ -16,6 +16,9 @@ xrdb -load .Xdefaults
 autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
 
+# Automatically lock the screen
+xautolock &
+
 # Auto-start applications
 trayer --edge top --align right --widthtype request --expand true --SetDockType true --SetPartialStrut true --transparent true --alpha 0 --tint 0xfdf6e3 --expand true --heighttype pixel --height 14  --padding 1 &
 nitrogen --restore &
