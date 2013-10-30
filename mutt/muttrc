@@ -12,6 +12,7 @@ set charset="utf-8"
 set locale=`echo "${LC_ALL:-${LC_TIME:-${LANG}}}"`
 set attach_charset="us-ascii:iso-8859-15:utf-8"
 set send_charset="us-ascii:iso-8859-15:utf-8"
+set header_cache=~/.mutt/cache
 
 set mbox_type     = Maildir           # mailbox type
 set sendmail      = /usr/bin/msmtp
@@ -21,6 +22,7 @@ set mbox        = "+[Gmail].All Mail"
 set postponed   = "+[Gmail].Drafts"
 unset record
 set imap_delim_chars='/'
+set mailcap_path      = ~/.mailcap
 
 mailboxes +INBOX
 
@@ -29,7 +31,7 @@ mailboxes +INBOX
 # Directories and external programs
 # ------------------------------------------------------------------------------
 
-set editor           = "/usr/bin/vim -c 'set tw=65 | normal +}jo'"  # use vim
+set editor           = "/usr/bin/vim +:silent+?^$"  # use vim
 set use_from
 set from = cgie@informatik.uni-kiel.de
 set realname = "Christian Gießen"
@@ -52,12 +54,18 @@ macro index,pager gr \
   "!goobook reload\n" \
   "Goobook reload"
 
+macro index ,s \
+  "<shell-escape>notmuch-mutt --prompt search<enter><change-folder-readonly>~/.cache/notmuch/mutt/results<enter>" \
+  "search mail via notmuch"
+
 # ------------------------------------------------------------------------------
 # Format Options
 # ------------------------------------------------------------------------------
 
 set date_format = "[%a, %F, %T]"
-set index_format = "%3C [%Z] %D %-15.15n %s"
+#set index_format = "%3C [%Z] %D %-15.15n %s"
+set index_format      = "%3C %Z %[!%m/%d] %-17.17F %s"
+#
 set status_format = "-%r- %v ---[ Folder: %f, Msgs: %m%?n? New: %n?%?d? Del: %d?%?t? Tag: %t?%?l? %l? ]%?p?---- .: %p waiting to send :. ?--%>- (%P) ---"
 set alias_format = "%4n %t %-20a%r"
 
