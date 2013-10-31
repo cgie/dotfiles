@@ -1,0 +1,1 @@
+/home/cgie/dotfiles/xmonad/xmonad.hs
