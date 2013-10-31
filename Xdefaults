@@ -63,7 +63,7 @@ URxvt.colorUL:      S_blue
 ! Xautolock
 ! ---------------------------------------------------------------------
 
-Xautolock.time: 360
+Xautolock.time: 5
 Xautolock.corners: 0+00
 Xautolock.locker: slock
-Xautolock.cornerdelay: 10
+Xautolock.cornerdelay: 3
