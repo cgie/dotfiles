@@ -14,6 +14,9 @@ Bundle 'tpope/vim-fugitive'
 
 syntax on
 
+let mapleader=" "
+let maplocalleader=" "
+
 function! MapToggle(key, opt)
   let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
   exec 'nnoremap '.a:key.' '.cmd
@@ -34,10 +37,10 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+nnoremap <silent><leader>h :set invhlsearch<CR>
 
-let mapleader=" "
-let maplocalleader=" "
 let &colorcolumn=join(range(81,400),",")
+
 
 set mouse=a
 set tabstop=2
