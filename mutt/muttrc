@@ -88,7 +88,7 @@ set menu_scroll
 alternative_order text/plain text/html # priority: plain first, then html
 set smart_wrap                         # no word splitting
 set tilde                              # vim style EOF tilde
-#auto_view text/html                    # view html emails
+auto_view text/html                    # view html emails
 #auto_view text/plain                   # view html emails
 unset markers
 #set display_filter = "par gqr"
@@ -186,3 +186,4 @@ set pgp_autosign
 # ------------------------------------------------------------------------------
 #
 source /usr/share/doc/mutt/colors/solarized/mutt-colors-solarized-light-16.muttrc
+source ~/.mutt/smimerc
