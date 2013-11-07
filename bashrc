@@ -108,7 +108,7 @@ alias txz='tar -pcJf'
 alias git='hub'
 
 function mad () {
-  markdown "$@" | w3m -dump -T text/html
+  pandoc -s -f markdown -t man "$@" | man -l -
 }
 # ---------------------------------------------------------------------
 # Pseudo Login Manager
