@@ -175,7 +175,8 @@ set pgp_export_command="gpg --charset utf-8 --no-verbose --export --armor %r" # 
 set pgp_verify_key_command="gpg --charset utf-8 --verbose --batch --fingerprint --check-sigs %r" # verify a key
 set pgp_list_pubring_command="gpg --charset utf-8 --no-verbose --batch --quiet --with-colons --list-keys %r" # read in the public key ring
 set pgp_list_secring_command="gpg --charset utf-8 --no-verbose --batch --quiet --with-colons --list-secret-keys %r" # read in the secret key ring
-set pgp_good_sign="^\\[GNUPG:\\] GOODSIG"
+#set pgp_good_sign="^\\[GNUPG:\\] GOODSIG"
+set pgp_good_sign="^gpg: Korrekte Signatur von"
 set pgp_replyencrypt = yes
 set pgp_replysign = yes
 set pgp_replysignencrypted = yes
@@ -184,6 +185,5 @@ set pgp_autosign
 # ------------------------------------------------------------------------------
 # Color settings
 # ------------------------------------------------------------------------------
-#
+
 source /usr/share/doc/mutt/colors/solarized/mutt-colors-solarized-light-16.muttrc
-source ~/.mutt/smimerc

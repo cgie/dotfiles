@@ -12,17 +12,6 @@ Xcursor.theme: ArchCursorTheme
 Xcursor.size:  12
 
 ! ---------------------------------------------------------------------
-! Xft
-! ---------------------------------------------------------------------
-
-!Xft.autohint: 0
-!Xft.lcdfilter:  lcddefault
-!Xft.hintstyle:  hintfull
-!Xft.hinting: 1
-!Xft.antialias: 1
-!Xft.dpi: 96
-
-! ---------------------------------------------------------------------
 ! urxvt
 ! ---------------------------------------------------------------------
 
@@ -31,6 +20,8 @@ URxvt*imFont          : xft:Inconsolata for Powerline:regular:pixelsize=18
 URxvt*boldFont        : xft:Inconsolata for Powerline:bold:pixelsize=18
 URxvt*italicFont      : xft:Inconsolata for Powerline:italic:pixelsize=18
 URxvt*boldItalicFont  : xft:Inconsolata for Powerline:bold:italic:pixelsize=18
+
+URxvt*buffered: false
 URxvt*scrollbars:	false
 URxvt*scrollBar:	false
 URxvt.keysym.KP_End: \033Oq
@@ -43,7 +34,7 @@ URxvt.urgentOnBell: true
 URxvt*cursorColor:	orange1
 URxvt*matcher.button:	1
 URxvt*visualBell:	true
-URxvt*depth:             32
+!URxvt*depth:             32
 URxvt.perl-ext-common:  default,matcher
 URxvt.url-launcher:      /usr/bin/chromium
 URxvt.matcher.button:   1
@@ -58,6 +49,11 @@ URxvt*keysym.End: \033[4~
 URxvt.colorIT:      S_green
 URxvt.colorBD:      S_yellow
 URxvt.colorUL:      S_blue
+
+! ---------------------------------------------------------------------
+! Xterm
+! ---------------------------------------------------------------------
+xterm*faceName: xft:MonteCarlo:pixelsize=18:style=Sans
 
 ! ---------------------------------------------------------------------
 ! Xautolock
