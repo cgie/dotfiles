@@ -11,6 +11,8 @@ Bundle 'wincent/Command-T'
 Bundle 'pbrisbin/vim-runfile'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
+Bundle 'nickng/vim-scribble'
+Bundle 'kchmck/vim-coffee-script'
 
 syntax on
 
@@ -45,6 +47,9 @@ let &colorcolumn=join(range(81,400),",")
 set mouse=a
 set tabstop=2
 set shiftwidth=2
+set autoindent
+set smartindent
+set cindent
 set expandtab
 set pastetoggle=<F8>
 set number
@@ -101,4 +106,3 @@ augroup vimrc
   autocmd FileType markdown setlocal formatoptions+=twn nosmartindent spell
   autocmd FileType html setlocal noshowmatch
 augroup END
-
