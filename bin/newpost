@@ -1,0 +1,24 @@
+#!/bin/bash
+
+die() { printf "%s\n" "$*" >&2; exit 1; }
+
+[ $# -eq 0 ] && die "usage: ./newpost <Title of the Post>"
+
+blog=$HOME/repos/giessen.io/posts
+title="$*"
+filename="$blog/$(date +%Y-%m-%d)-$(printf "$title" | sed 's/.*/\L&/; s/ \+/-/g').md"
+
+[ -e "$filename" ] && die "$filename exists?"
+
+cat > "$filename" <<EOF
+---
+layout: post
+title: "$title"
+tags:
+  - TODO
+  - TODO
+---
+
+EOF
+
+vim "$filename" +'normal Go'
