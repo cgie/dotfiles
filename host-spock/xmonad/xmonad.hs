@@ -37,8 +37,8 @@ scratchpads = [ NS "screen"   spawnScreen  findScreen   manageScreen
     findScreen   = resource =? "scratchpad"
     manageScreen = customFloating $ W.RationalRect l t w h
       where
-        h = 0.4
-        w = 0.8
+        h = 0.6
+        w = 0.9
         t = (1 - h) / 2
         l = (1 - w) / 2
 
