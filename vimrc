@@ -11,6 +11,11 @@ Bundle 'wincent/Command-T'
 Bundle 'pbrisbin/vim-runfile'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
+Bundle 'nickng/vim-scribble'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'groenewege/vim-less'
+Bundle 'suan/vim-instant-markdown'
+Bundle 'aperezdc/vim-template'
 
 syntax on
 
@@ -45,6 +50,9 @@ let &colorcolumn=join(range(81,400),",")
 set mouse=a
 set tabstop=2
 set shiftwidth=2
+set autoindent
+set smartindent
+set cindent
 set expandtab
 set pastetoggle=<F8>
 set number
@@ -65,13 +73,14 @@ filetype plugin indent on
 
 if $TERM =~ "-256color"
   set t_Co=256
-  let &background = readfile('/home/cgie/.solarizedstatus', '', 1)[0]
+"  let &background = readfile('/home/cgie/.solarizedstatusforvim', '', 1)[0]
+  set background=dark
   colorscheme solarized
 endif
 
 if has("gui_running")
   set t_Co=256
-  let &background = readfile('/home/cgie/.solarizedstatus', '', 1)[0]
+"  let &background = readfile('/home/cgie/.solarizedstatusforvim', '', 1)[0]
   colorscheme solarized
   set guifont=Inconsolata\ for\ Powerline\ 12
   set guioptions=e
@@ -98,7 +107,6 @@ augroup vimrc
   autocmd FileType gitcommit setlocal spell
   autocmd FileType haskell setlocal shiftwidth=4 | let b:ctags_command = 'hs-ctags %f'
   autocmd FileType mail setlocal spell nohlsearch
-  autocmd FileType markdown setlocal formatoptions+=twn nosmartindent spell
+  autocmd FileType markdown setlocal formatoptions+=twn nosmartindent spell nofoldenable
   autocmd FileType html setlocal noshowmatch
 augroup END
-

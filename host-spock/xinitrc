@@ -12,6 +12,8 @@ xset -b
 
 xrdb -load .Xdefaults
 
+$HOME/.gem/ruby/2.0.0/gems/gollum-2.5.2/bin/gollum /repos/labnotes &
+
 # Wacom Bamboo Pen & Touch configuration
 /home/cgie/wacom-init
 
