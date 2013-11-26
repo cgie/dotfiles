@@ -14,6 +14,8 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'nickng/vim-scribble'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'groenewege/vim-less'
+Bundle 'suan/vim-instant-markdown'
+Bundle 'aperezdc/vim-template'
 
 syntax on
 
