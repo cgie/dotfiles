@@ -59,8 +59,7 @@ function channel {
 prompt_colored
 export PATH=$PATH:$HOME/bin:$HOME/.cabal/bin:/opt/android-sdk/tools/
 export PATH=$PATH:$HOME/bin:$HOME/.cabal/bin
-export PATH="$PATH:$HOME/.rbenv/bin"
-eval "$(rbenv init -)"
+export PATH="$PATH:/home/cgie/.gem/ruby/2.0.0/bin"
 #export HTTP_PROXY="localhost:8123"
 export EDITOR="vim"
 #export DISPLAY=:0
