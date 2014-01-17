@@ -57,10 +57,9 @@ function channel {
 [ -f $HOME/.dircolors ] && eval "$(TERM=rxvt-unicode-256 dircolors -b ~/.dircolors)"
 #prompt_standard
 prompt_colored
+export PATH=$PATH:$HOME/bin:$HOME/.cabal/bin:/opt/android-sdk/tools/
 export PATH=$PATH:$HOME/bin:$HOME/.cabal/bin
-export PATH="$PATH:$HOME/.rbenv/bin"
-eval "$(rbenv init -)"
-
+export PATH="$PATH:/home/cgie/.gem/ruby/2.0.0/bin"
 #export HTTP_PROXY="localhost:8123"
 export EDITOR="vim"
 #export DISPLAY=:0
@@ -84,6 +83,8 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
 #export LESS_TERMCAP_so=$green  # begin standout-mode - info box
 #export LESS_TERMCAP_ue=$NC     # end underline
 #export LESS_TERMCAP_us=$yellow # begin underline
+export AWT_TOOLKIT=MToolkit
+
 
 #source /etc/profile.d/apache-ant.sh
 

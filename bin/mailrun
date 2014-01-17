@@ -26,4 +26,5 @@ if ps $pid &>/dev/null; then
 fi
 
 offlineimap -o -u quiet & monitor $!
+notmuch new
 

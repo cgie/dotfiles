@@ -12,6 +12,8 @@ xrdb -load .Xdefaults
 # Wacom Bamboo Pen & Touch configuration
 #/home/cgie/wacom-init
 
+$HOME/.gem/ruby/2.0.0/gems/gollum-2.5.2/bin/gollum /repos/labnotes &
+
 # Sync clipboards
 autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
@@ -26,3 +28,5 @@ xcompmgr &
 sleep 120 && dropboxd &
 
 exec xmonad
+
+
