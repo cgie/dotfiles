@@ -76,6 +76,7 @@ export OOO_FORCE_DESKTOP=gnome # for openoffice
 export MOZ_DISABLE_PANGO=1
 export SCREEN_CONF_DIR="$HOME/.screen/configs"
 export SCREEN_CONF="main"
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
 #export LESS_TERMCAP_mb=$red    # begin blinking
 #export LESS_TERMCAP_md=$BLUE   # begin bold
 #export LESS_TERMCAP_me=$NC     # end mode
