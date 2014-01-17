@@ -2,23 +2,27 @@
 
 die() { printf "%s\n" "$*" >&2; exit 1; }
 
-[ $# -eq 0 ] && die "usage: ./newpost <Title of the Post>"
+#[ $# -eq 0 ] && die "usage: ./cup<Title of the Post>"
 
-blog=$HOME/repos/giessen.io/posts
+cupfolder=/repos/coffee
 title="$*"
-filename="$blog/$(date +%Y-%m-%d)-$(printf "$title" | sed 's/.*/\L&/; s/ \+/-/g').md"
+today=$(date +%Y-%m-%d)
+ncup=$[$(ls -1 $cupfolder/${today}* 2>&1|wc -l)+1]
+filename=$cupfolder/${today}-${ncup}.yaml
 
 [ -e "$filename" ] && die "$filename exists?"
 
 cat > "$filename" <<EOF
----
-layout: post
-title: "$title"
-tags:
-  - TODO
-  - TODO
----
+date:   $today
+id:     
+beans:  
+coffee: 
+water:  
+method: 
+grind:
+note: |
 
+...
 EOF
 
-vim "$filename" +'normal Go'
+vim "$filename" +'normal 2gg$a'

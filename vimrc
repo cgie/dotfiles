@@ -43,6 +43,9 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <silent><leader>h :set invhlsearch<CR>
+nnoremap <leader>n :bnext<CR>
+nnoremap <leader>p :bprev<CR>
+nnoremap <leader>d :bdelete<CR>
 
 let &colorcolumn=join(range(81,400),",")
 
@@ -66,6 +69,10 @@ set hlsearch
 set lazyredraw
 set ttyfast
 set nofoldenable
+set hidden
+set ignorecase
+set smartcase
+set showcmd
 
 highlight Comment cterm=italic
 filetype plugin indent on
@@ -97,7 +104,12 @@ nnoremap         ,b   :CommandTBuffer<CR>
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "solarized"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#fnamemod = ':t:r'
 set laststatus=2
+
+let g:LatexBox_quickfix=2
 
 set ttimeoutlen=50
 

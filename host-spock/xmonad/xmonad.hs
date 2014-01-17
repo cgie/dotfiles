@@ -24,6 +24,7 @@ import Data.List (elemIndex)
 import Data.Function (on)
 import XMonad.Util.WorkspaceCompare
 import qualified Solarized.Light as S
+
 --------------------------------------------------------------------------------
 -- My Scratchpads
 
@@ -126,7 +127,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,               xK_F9        ), spawn "~/bin/wacom-left")
   , ((modMask,               xK_F10       ), spawn "~/bin/wacom-right")
   , ((modMask,               xK_F12       ), spawn "~/bin/wacom-init")
-  , ((modMask,               xK_F3        ), spawn "xterm -e ranger")
+  , ((modMask,               xK_F3        ), spawn "thunar")
   , ((modMask              , xK_Page_Up   ), spawn "transset-df -p --inc 0.01")
   , ((modMask              , xK_Page_Down ), spawn "transset-df -p --min 0.2 --dec 0.01")
   , ((modMask              , xK_BackSpace ), spawn "xmonad --recompile && xmonad --restart")
