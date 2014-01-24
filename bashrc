@@ -84,7 +84,7 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
 #export LESS_TERMCAP_ue=$NC     # end underline
 #export LESS_TERMCAP_us=$yellow # begin underline
 export AWT_TOOLKIT=MToolkit
-
+export PWSAFE_DATABASE=Dropbox/pwsafe.dat
 
 #source /etc/profile.d/apache-ant.sh
 
