@@ -9,6 +9,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.FadeInactive (setOpacity)
 import XMonad.Prompt
 import XMonad.Prompt.Shell
+import XMonad.Prompt.Input
 import Data.Monoid
 import XMonad.Hooks.ManageDocks
 import qualified XMonad.StackSet as W
@@ -17,14 +18,17 @@ import XMonad.Layout.IndependentScreens
 import Data.Ratio ((%))
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.OneBig
+import XMonad.Layout.Roledex
+import XMonad.Layout.Tabbed
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run
 import XMonad.Hooks.ManageHelpers
 import Data.List (elemIndex)
 import Data.Function (on)
 import XMonad.Util.WorkspaceCompare
-import qualified Solarized.Light as S
-
+import qualified Solarized.Dark as S
+--import qualified Solarized.Light as S
 --------------------------------------------------------------------------------
 -- My Scratchpads
 
@@ -92,6 +96,9 @@ myXPConfig = defaultXPConfig
   , bgColor = S.base03
   , fgColor = S.base3
   }
+
+myPwsafePrompt :: String -> X ()
+myPwsafePrompt s = spawn ("urxvt -pe -default,-matcher,-tabbed -tr -bg black -sh 100 -g 400x2 -title pwsafe -e pwsafe -p " ++ s)
 -----------------------------------------------------------------------
 -- Status bar options:
 -- Too complex, but I'll change the left one some day anyway...
@@ -106,7 +113,7 @@ dzenCommand (S s) = unwords ["dzen2", "-p", "-xs", show s, dconf s]
 -----------------------------------------------------------------------
 -- Layouts:
 
-myLayouts = avoidStruts $ smartBorders $ tiled ||| Mirror tiled ||| Full
+myLayouts = avoidStruts $ smartBorders $  tiled ||| Mirror tiled ||| OneBig (3/4) (3/4) ||| Roledex ||| simpleTabbed ||| Full
   where
   tiled        = ResizableTall nmaster delta ratio []
   nmaster      = 1
@@ -131,6 +138,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask              , xK_Page_Up   ), spawn "transset-df -p --inc 0.01")
   , ((modMask              , xK_Page_Down ), spawn "transset-df -p --min 0.2 --dec 0.01")
   , ((modMask              , xK_BackSpace ), spawn "xmonad --recompile && xmonad --restart")
+  , ((modMask,               xK_p         ), inputPrompt myXPConfig "pwsafe" ?+ myPwsafePrompt )
   , ((modMask,               xK_space     ), refresh)
   , ((modMask              , xK_x         ), shellPrompt myXPConfig)
   , ((modMask              , xK_q         ), kill)
@@ -202,6 +210,7 @@ myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
     --> (ask >>= \w -> liftX (setOpacity w 0.8) >> idHook)
   , resource  =? "desktop_window"      --> doIgnore
   , resource  =? "kdesktop"            --> doIgnore
+  , title     =? "pwsafe"              --> doFloat
   ]
 -----------------------------------------------------------------------
 -- dynamicLog format for dzen:
@@ -243,7 +252,7 @@ main = do
     , modMask            = myModMask
     , workspaces         = myWorkspaces
     , normalBorderColor  = S.base0
-    , focusedBorderColor = S.base00
+    , focusedBorderColor = S.yellow
     , keys               = myKeys
     , mouseBindings      = myMouseBindings
     , layoutHook         = myLayouts
