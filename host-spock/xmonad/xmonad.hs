@@ -6,7 +6,7 @@ import XMonad.Hooks.EwmhDesktops
 import System.Exit (exitSuccess)
 import XMonad.Layout.NoBorders
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.FadeInactive (setOpacity)
+import XMonad.Hooks.FadeInactive -- (setOpacity)
 import XMonad.Prompt
 import XMonad.Prompt.Shell
 import XMonad.Prompt.Input
@@ -258,7 +258,7 @@ main = do
     , layoutHook         = myLayouts
     , handleEventHook    = handleEventHook defaultConfig <+> fullscreenEventHook
     , manageHook         = myManageHook  <+> manageDocks
-    , logHook            = mapM_ dynamicLogWithPP $ zipWith myDzenPP handles [0..nScreens-1]
+    , logHook            = fadeInactiveLogHook 0.9 <+> (mapM_ dynamicLogWithPP $ zipWith myDzenPP handles [0..nScreens-1])
     , startupHook        = myStartupHook
     }
 
