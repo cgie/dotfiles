@@ -50,11 +50,57 @@ function channel {
     mplayer dvb://"$1"
 }
 
+__seteq()
+{
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $(compgen -W "speakers notebook headphones flat classical club dance headphones bass treble party pop large_hall reggae ropck ska soft_rock soft techno" -- $cur) )
+}
+complete -F __seteq seteq
+
+_seteq(){
+  amixer -D equal -q set '01. 31 Hz' $1
+  amixer -D equal -q set '02. 63 Hz' $2
+  amixer -D equal -q set '03. 125 Hz' $3
+  amixer -D equal -q set '04. 250 Hz' $4
+  amixer -D equal -q set '05. 500 Hz' $5
+  amixer -D equal -q set '06. 1 kHz' $6
+  amixer -D equal -q set '07. 2 kHz' $7
+  amixer -D equal -q set '08. 4 kHz' $8
+  amixer -D equal -q set '09. 8 kHz' $9
+  amixer -D equal -q set '10. 16 kHz' ${10}
+}
+
+seteq(){
+  case $1 in
+    speakers) _seteq 80 70 65 60 60 60 60 80 80 80;;
+    notebook) _seteq 00 75 75 70 50 50 60 70 85 85;;
+    headphones) _seteq 66 66 66 66 55 30 53 15 80 85;;
+    flat) _seteq 65 65 65 65 65 65 65 65 65 65;;
+    classical) _seteq 71 71 71 71 71 71 84 83 83 87;;
+    club) _seteq 71 71 67 63 63 63 67 71 71 71;;
+    dance) _seteq 57 61 69 71 71 81 83 83 71 71;;
+    headphones) _seteq 65 55 64 77 75 70 65 57 52 49;;
+    bass) _seteq 59 59 59 63 70 78 85 88 89 89;;
+    treble) _seteq 87 87 87 78 68 55 47 47 47 45;;
+    large_hall) _seteq 56 56 63 63 71 79 79 79 71 71;;
+    live) _seteq 79 71 66 64 63 63 66 68 68 69;;
+    party) _seteq 61 61 71 71 71 71 71 71 61 61;;
+    pop) _seteq 74 65 61 60 64 73 75 75 74 74;;
+    reggae) _seteq 71 71 72 81 71 62 62 71 71 71;;
+    rock) _seteq 58 63 80 84 77 66 58 55 55 55;;
+    ska) _seteq 75 79 78 72 66 63 58 57 55 57;;
+    soft_rock) _seteq 66 66 69 72 78 80 77 72 68 58;;
+    soft) _seteq 65 70 73 75 73 66 59 57 55 53;;
+    techno) _seteq 60 63 71 80 79 71 60 57 57 58;;
+    *) _seteq 66 66 66 66 66 66 66 66 66 66;;
+  esac
+}
+
 # ---------------------------------------------------------------------
 # Exports, variables and settings
 # ---------------------------------------------------------------------
 
-[ -f $HOME/.dircolors ] && eval "$(TERM=rxvt-unicode-256 dircolors -b ~/.dircolors)"
+[ -f $HOME/.dircolors ] && eval "$(TERM=rxvt-unicode-256color dircolors -b ~/.dircolors)"
 #prompt_standard
 prompt_colored
 export PATH=$PATH:$HOME/bin:$HOME/.cabal/bin:/opt/android-sdk/tools/
@@ -85,6 +131,8 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
 #export LESS_TERMCAP_us=$yellow # begin underline
 export AWT_TOOLKIT=MToolkit
 export PWSAFE_DATABASE=Dropbox/pwsafe.dat
+export vblank_mode=0
+
 
 #source /etc/profile.d/apache-ant.sh
 
