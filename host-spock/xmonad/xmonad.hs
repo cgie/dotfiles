@@ -95,7 +95,11 @@ myXPConfig = defaultXPConfig
   { font = "xft:" ++ myFont
   , bgColor = S.base03
   , fgColor = S.base3
+  , promptKeymap = M.insert (shiftMask, xK_Insert) pasteString defaultXPKeymap
   }
+
+myMicroBlogPrompt:: String -> X ()
+myMicroBlogPrompt s = spawn ("bash /home/cgie/bin/noblog " ++ s)
 
 myPwsafePrompt :: String -> X ()
 myPwsafePrompt s = spawn ("urxvt -pe -default,-matcher,-tabbed -tr -bg black -sh 100 -g 400x2 -title pwsafe -e pwsafe -p " ++ s)
@@ -113,7 +117,7 @@ dzenCommand (S s) = unwords ["dzen2", "-p", "-xs", show s, dconf s]
 -----------------------------------------------------------------------
 -- Layouts:
 
-myLayouts = avoidStruts $ smartBorders $  tiled ||| Mirror tiled ||| OneBig (3/4) (3/4) ||| Roledex ||| simpleTabbed ||| Full
+myLayouts = avoidStruts $ smartBorders $  Mirror tiled ||| tiled ||| OneBig (3/4) (3/4) ||| Roledex ||| simpleTabbed ||| Full
   where
   tiled        = ResizableTall nmaster delta ratio []
   nmaster      = 1
@@ -134,7 +138,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,               xK_F9        ), spawn "~/bin/wacom-left")
   , ((modMask,               xK_F10       ), spawn "~/bin/wacom-right")
   , ((modMask,               xK_F12       ), spawn "~/bin/wacom-init")
-  , ((modMask,               xK_F3        ), spawn "thunar")
+  , ((modMask,               xK_F3        ), spawn "pcmanfm")
+  , ((modMask,               xK_F4        ), inputPrompt myXPConfig "New Message" ?+ myMicroBlogPrompt)
   , ((modMask              , xK_Page_Up   ), spawn "transset-df -p --inc 0.01")
   , ((modMask              , xK_Page_Down ), spawn "transset-df -p --min 0.2 --dec 0.01")
   , ((modMask              , xK_BackSpace ), spawn "xmonad --recompile && xmonad --restart")
