@@ -2,10 +2,10 @@
 
 $HOME/bin/wacom-right # initialize the tablet on the right screen
 
-xsetwacom --set "Wacom Bamboo 16FG 4x5 Finger pad" Button 1 "key +ctrl z -ctrl"
+xsetwacom --set "Wacom Bamboo 16FG 4x5 Finger pad" Button 3 "key +ctrl z -ctrl"
 xsetwacom --set "Wacom Bamboo 16FG 4x5 Finger pad" Button 9 "key +ctrl +plus -plus -ctrl"
 xsetwacom --set "Wacom Bamboo 16FG 4x5 Finger pad" Button 8 "key +ctrl +minus -minus -ctrl"
-xsetwacom --set "Wacom Bamboo 16FG 4x5 Finger pad" Button 3 "key +ctrl +y -y -ctrl"
+xsetwacom --set "Wacom Bamboo 16FG 4x5 Finger pad" Button 1 "key +ctrl +y -y -ctrl"
 
 # stylus
 
