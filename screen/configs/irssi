@@ -3,6 +3,5 @@ defbce "on"
 
 #screen -t mudnews   4 slrn -h ff.mud.de
 #screen -t news      5 slrn -h news.tng.de
-screen -t torrent   0 rtorrent
-screen -t tf        1 tf
-screen -t irssi   2 irssi
+screen -t giessen.io 2 ssh giessen.io screen -Dr
+screen -t tf         1 tf

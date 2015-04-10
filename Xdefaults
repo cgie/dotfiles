@@ -15,6 +15,7 @@ Xcursor.size:  12
 ! urxvt
 ! ---------------------------------------------------------------------
 
+!URxvt*font            : xft:Mensch:regular:pixelsize=18
 URxvt*font            : xft:Inconsolata for Powerline:regular:pixelsize=18
 URxvt*imFont          : xft:Inconsolata for Powerline:regular:pixelsize=18
 URxvt*boldFont        : xft:Inconsolata for Powerline:bold:pixelsize=18
@@ -35,7 +36,7 @@ URxvt*cursorColor:	orange1
 URxvt*matcher.button:	1
 URxvt*visualBell:	true
 !URxvt*depth:             32
-URxvt.perl-ext-common:  default,matcher
+URxvt.perl-ext-common:  default,matcher,font-size
 URxvt.url-launcher:      /usr/bin/chromium
 URxvt.matcher.button:   1
 URxvt*shading:	0
@@ -49,6 +50,13 @@ URxvt*keysym.End: \033[4~
 URxvt.colorIT:      S_green
 URxvt.colorBD:      S_yellow
 URxvt.colorUL:      S_blue
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
 
 ! ---------------------------------------------------------------------
 ! Xterm

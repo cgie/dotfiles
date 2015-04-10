@@ -8,7 +8,8 @@
 shopt -s histappend
 shopt -s checkwinsize
 
-TERM=xterm-256color
+#TERM=xterm-256color
+TERM=rxvt-unicode-256color
 
 # ---------------------------------------------------------------------
 # Colors
@@ -16,6 +17,7 @@ TERM=xterm-256color
 
 #source $HOME/.bash_colors
 #source $HOME/bin/.git-completion.bash
+complete -F _todo t
 
 # ---------------------------------------------------------------------
 # Functions
@@ -54,7 +56,7 @@ function channel {
 # Exports, variables and settings
 # ---------------------------------------------------------------------
 
-[ -f $HOME/.dircolors ] && eval "$(TERM=rxvt-unicode-256 dircolors -b ~/.dircolors)"
+[ -f $HOME/.dircolors ] && eval $(dircolors ~/.dircolors)
 #prompt_standard
 prompt_colored
 export PATH=$PATH:$HOME/bin:$HOME/.cabal/bin:/opt/android-sdk/tools/
@@ -69,7 +71,7 @@ declare -x HISTIGNORE='??' # don't show 2-char commands in history
 export HISTSIZE=25000
 export HISTFILESIZE=25000
 export HISTTIMEFORMAT='%Y-%m-%d %H:%M '
-export LANG="de_DE.utf8"
+#export LANG="de_DE.utf8"
 export LOGS="$HOME/var/log"
 export OOO_FORCE_DESKTOP=gnome # for openoffice
 export MOZ_DISABLE_PANGO=1
@@ -85,6 +87,8 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd'
 #export LESS_TERMCAP_us=$yellow # begin underline
 export AWT_TOOLKIT=MToolkit
 export PWSAFE_DATABASE=Dropbox/pwsafe.dat
+export GTK_IM_MODULE="xim"
+
 
 #source /etc/profile.d/apache-ant.sh
 
@@ -111,10 +115,28 @@ alias tgz='tar -pczf'
 alias tbz2='tar -pcjf'
 alias txz='tar -pcJf'
 alias git='hub'
+alias steem='STEAM_RUNTIME=0 steam'
+alias t='vim /home/cgie/Dropbox/todo/todo.txt'
 
 function mad () {
   pandoc -s -f markdown -t man "$@" | man -l -
 }
+
+function seteq() {
+    amixer -D equal -q set '01. 31 Hz' $1
+    amixer -D equal -q set '02. 63 Hz' $2 
+    amixer -D equal -q set '03. 125 Hz' $3 
+    amixer -D equal -q set '04. 250 Hz' $4 
+    amixer -D equal -q set '05. 500 Hz' $5 
+    amixer -D equal -q set '06. 1 kHz' $6 
+    amixer -D equal -q set '07. 2 kHz' $7 
+    amixer -D equal -q set '08. 4 kHz' $8 
+    amixer -D equal -q set '09. 8 kHz' $9 
+    amixer -D equal -q set '10. 16 kHz' ${10} 
+} 
+
+
+
 # ---------------------------------------------------------------------
 # Pseudo Login Manager
 # ---------------------------------------------------------------------
