@@ -1,9 +1,8 @@
 set nocompatible
 filetype off
-
+set shell=/bin/bash
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-
 
 Bundle 'gmarik/vundle'
 Bundle 'altercation/vim-colors-solarized'
@@ -22,11 +21,10 @@ Bundle 'ldmud/ldmud-extensions/vim-less'
 "Bundle 'ervandew/screen'
 Bundle 'freitass/todo.txt-vim'
 
-
 syntax on
 
 let mapleader=" "
-let maplocalleader=" "
+let maplocalleader=","
 
 function! MapToggle(key, opt)
   let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"

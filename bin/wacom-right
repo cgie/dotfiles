@@ -1,2 +1,3 @@
-xsetwacom --set "Wacom Intuos PT S Pen stylus" MapToOutput "eDP1"
-xsetwacom --set "Wacom Intuos PT S Pen eraser" MapToOutput "eDP1"
+xsetwacom --set "Wacom Intuos PT S Pen stylus" Rotate ccw
+xsetwacom --set "Wacom Intuos PT S Pen stylus" MapToOutput "HDMI2"
+xsetwacom --set "Wacom Intuos PT S Pen eraser" MapToOutput "HDMI2"

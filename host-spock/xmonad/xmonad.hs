@@ -36,6 +36,7 @@ scratchpads = [ NS "screen"   spawnScreen  findScreen   manageScreen
               , NS "calc"     spawnCalc    findCalc     manageCalc
               , NS "clock"    spawnClock   findClock    manageClock
               , NS "scribble" spawnXournal findXournal  manageXournal
+              , NS "cheat"    spawnCheat   findCheat    manageCheat
               ]
   where
     spawnScreen  = myTerminal ++ " -name scratchpad -e screen -c ~/.screen/configs/scratchpad -S scratchpad -D -R scratchpad screen"
@@ -74,6 +75,12 @@ scratchpads = [ NS "screen"   spawnScreen  findScreen   manageScreen
         w = 1
         t = (1 - h) / 2
         l = (1 - w) / 2
+
+    spawnCheat  = "feh --title cheat -Fd /home/cgie/.cheatsheets/"
+    findCheat   = title =? "cheat"
+      where title = stringProperty "WM_NAME"
+    manageCheat = defaultFloating
+
 --------------------------------------------------------------------------------
 -- Color and font definitions:
 -- Appeareance and standard definitions:
@@ -81,7 +88,7 @@ myFont = "inconsolata:pixelsize=18:antialias=true:hinting=true"
 myIconDir = "/home/cgie/usr/share/dzen_bitmaps"
 myTerminal           = "urxvt"
 myFocusFollowsMouse  = True
-myBorderWidth        = 4
+myBorderWidth        = 0
 myModMask            = mod4Mask
 myWorkspaces         = withScreens 2 ["un","deux","trois","quatre","cinq","six"
                                      ,"sept","huite","neuf"
@@ -117,7 +124,7 @@ dzenCommand (S s) = unwords ["dzen2", "-p", "-xs", show s, dconf s]
 -----------------------------------------------------------------------
 -- Layouts:
 
-myLayouts = avoidStruts $ smartBorders $  Mirror tiled ||| tiled ||| OneBig (3/4) (3/4) ||| Roledex ||| simpleTabbed ||| Full
+myLayouts = avoidStruts $ smartBorders $  tiled ||| Mirror tiled ||| OneBig (3/4) (3/4) ||| Roledex ||| simpleTabbed ||| Full
   where
   tiled        = ResizableTall nmaster delta ratio []
   nmaster      = 1
@@ -130,7 +137,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   [ ((modMask              , xK_r         ), spawn "urxvt")
   , ((modMask,               xK_f         ), spawn "chromium")
   , ((modMask,               xK_F1        ), spawn "urxvt -e mutt")
-  , ((modMask,               xK_F2        ), spawn "mathematica")
+  , ((modMask,               xK_F2        ), namedScratchpadAction scratchpads "cheat")
   , ((modMask,               xK_adiaeresis), namedScratchpadAction scratchpads "calc")
   , ((modMask,               xK_udiaeresis), namedScratchpadAction scratchpads "clock")
   , ((modMask,               xK_odiaeresis), namedScratchpadAction scratchpads "screen")
@@ -263,7 +270,8 @@ main = do
     , layoutHook         = myLayouts
     , handleEventHook    = handleEventHook defaultConfig <+> fullscreenEventHook
     , manageHook         = myManageHook  <+> manageDocks
-    , logHook            = fadeInactiveLogHook 0.9 <+> (mapM_ dynamicLogWithPP $ zipWith myDzenPP handles [0..nScreens-1])
+    , logHook            = fadeInactiveLogHook 1 <+> (mapM_ dynamicLogWithPP $ zipWith myDzenPP handles [0..nScreens-1])
+--    , logHook            = mapM_ dynamicLogWithPP $ zipWith myDzenPP handles [0..nScreens-1]
     , startupHook        = myStartupHook
     }
 

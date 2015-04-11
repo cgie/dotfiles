@@ -135,6 +135,8 @@ export AWT_TOOLKIT=MToolkit
 export PWSAFE_DATABASE=Dropbox/pwsafe.dat
 export vblank_mode=0
 export GTK_IM_MODULE="xim"
+export MPD_HOST=alarmpi
+export MPD_PORT=6650
 
 #source /etc/profile.d/apache-ant.sh
 
@@ -161,8 +163,9 @@ alias tgz='tar -pczf'
 alias tbz2='tar -pcjf'
 alias txz='tar -pcJf'
 alias git='hub'
-alias steem='STEAM_RUNTIME=0 steam'
 alias t='vim /home/cgie/Dropbox/todo/todo.txt'
+alias steem='STEAM_RUNTIME=0 steam'
+alias vim='vim --servername VIM'
 
 function mad () {
   pandoc -s -f markdown -t man "$@" | man -l -
