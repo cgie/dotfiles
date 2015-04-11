@@ -1,3 +1,2 @@
-xsetwacom --set "Wacom Bamboo 16FG 4x5 Pen stylus" Rotate ccw
-xsetwacom --set "Wacom Bamboo 16FG 4x5 Pen stylus" MapToOutput "HDMI2"
-xsetwacom --set "Wacom Bamboo 16FG 4x5 Pen eraser" MapToOutput "HDMI2"
+xsetwacom --set "Wacom Intuos PT S Pen stylus" MapToOutput "eDP1"
+xsetwacom --set "Wacom Intuos PT S Pen eraser" MapToOutput "eDP1"

@@ -7,17 +7,21 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'wincent/Command-T'
-Bundle 'pbrisbin/vim-runfile'
+"Bundle 'wincent/Command-T'
+"Bundle 'pbrisbin/vim-runfile'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
 Bundle 'nickng/vim-scribble'
-Bundle 'kchmck/vim-coffee-script'
+"Bundle 'kchmck/vim-coffee-script'
 Bundle 'groenewege/vim-less'
 Bundle 'ldmud/ldmud-extensions/vim-less'
 "Bundle 'suan/vim-instant-markdown'
 "Bundle 'aperezdc/vim-template'
-Bundle 'vim-scripts/brainfuck-syntax.git'
+"Bundle 'vim-scripts/brainfuck-syntax.git'
+"Bundle 'jcfaria/Vim-R-plugin'
+"Bundle 'ervandew/screen'
+Bundle 'freitass/todo.txt-vim'
+
 
 syntax on
 
@@ -75,6 +79,11 @@ set hidden
 set ignorecase
 set smartcase
 set showcmd
+set undofile
+set undodir=/home/cgie/.vim/undo
+set undolevels=1000
+set undoreload=10000
+set noswapfile
 
 highlight Comment cterm=italic
 filetype plugin indent on

@@ -33,7 +33,7 @@ mailboxes +INBOX
 
 set editor           = "/usr/bin/vim +:silent+?^$"  # use vim
 set use_from
-set from = cgie@informatik.uni-kiel.de
+set from = cgie@dtu.dk
 set realname = "Christian Gießen"
 set reply_self # for testing purposes
 set metoo
