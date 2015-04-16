@@ -1,9 +1,8 @@
 set nocompatible
 filetype off
-
+set shell=/bin/bash
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-
 
 Bundle 'gmarik/vundle'
 Bundle 'altercation/vim-colors-solarized'
@@ -14,6 +13,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'nickng/vim-scribble'
 "Bundle 'kchmck/vim-coffee-script'
 Bundle 'groenewege/vim-less'
+Bundle 'ldmud/ldmud-extensions/vim-less'
 "Bundle 'suan/vim-instant-markdown'
 "Bundle 'aperezdc/vim-template'
 "Bundle 'vim-scripts/brainfuck-syntax.git'
@@ -21,7 +21,6 @@ Bundle 'groenewege/vim-less'
 "Bundle 'ervandew/screen'
 Bundle 'freitass/todo.txt-vim'
 Bundle 'scrooloose/nerdtree'
-
 
 syntax on
 
@@ -116,7 +115,7 @@ let g:runfile_by_type = {
     \ 'sage' : '!sage -t %'
     \ }
 
-nnoremap         ,b   :CommandTBuffer<CR>
+nnoremap         <leader>b   :CommandTBuffer<CR>
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "solarized"
