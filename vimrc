@@ -83,10 +83,6 @@ set undolevels=1000
 set undoreload=10000
 set noswapfile
 
-highlight Comment cterm=italic
-filetype plugin indent on
-
-
 if $TERM =~ "-256color"
   set t_Co=256
 "  let &background = readfile('/home/cgie/.solarizedstatusforvim', '', 1)[0]
@@ -102,6 +98,8 @@ if has("gui_running")
   set guioptions=e
 endif
 
+highlight Comment cterm=italic
+filetype plugin indent on
 
 let g:runfile_by_type = {
     \ 'racket': '!racket %',

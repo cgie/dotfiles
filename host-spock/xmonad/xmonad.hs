@@ -1,3 +1,4 @@
+
 --------------------------------------------------------------------------------
 -- ~/.xmonad/xmonad.hs
 
@@ -27,8 +28,7 @@ import XMonad.Hooks.ManageHelpers
 import Data.List (elemIndex)
 import Data.Function (on)
 import XMonad.Util.WorkspaceCompare
-import qualified Solarized.Dark as S
---import qualified Solarized.Light as S
+import qualified Solarized.Light as S
 --------------------------------------------------------------------------------
 -- My Scratchpads
 
@@ -84,7 +84,7 @@ scratchpads = [ NS "screen"   spawnScreen  findScreen   manageScreen
 --------------------------------------------------------------------------------
 -- Color and font definitions:
 -- Appeareance and standard definitions:
-myFont = "inconsolata:pixelsize=18:antialias=true:hinting=true"
+myFont = "Monofur for Powerline:pixelsize=20:antialias=true:hinting=true"
 myIconDir = "/home/cgie/usr/share/dzen_bitmaps"
 myTerminal           = "urxvt"
 myFocusFollowsMouse  = True
@@ -115,10 +115,10 @@ myPwsafePrompt s = spawn ("urxvt -pe -default,-matcher,-tabbed -tr -bg black -sh
 -- Too complex, but I'll change the left one some day anyway...
 
 dzenCommand (S s) = unwords ["dzen2", "-p", "-xs", show s, dconf s]
-  where dconf 1 = "-u -h '18' -ta 'l' -fg '" ++ S.base0 ++ "' -bg '"
+  where dconf 1 = "-u -h '20' -ta 'l' -fg '" ++ S.base0 ++ "' -bg '"
                   ++ S.base03 ++ "' -fn '" ++ myFont
                   ++ "' -u -e 'onstart=lower'"
-        dconf _ = "-u -h '18' -ta 'l' -fg '" ++ S.base0 ++ "' -bg '"
+        dconf _ = "-u -h '20' -ta 'l' -fg '" ++ S.base0 ++ "' -bg '"
                   ++ S.base03 ++ "' -fn '" ++ myFont
                   ++ "' -u -e 'onstart=lower'"
 -----------------------------------------------------------------------
@@ -149,13 +149,13 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   , ((modMask,               xK_F4        ), inputPrompt myXPConfig "New Message" ?+ myMicroBlogPrompt)
   , ((modMask              , xK_Page_Up   ), spawn "transset-df -p --inc 0.01")
   , ((modMask              , xK_Page_Down ), spawn "transset-df -p --min 0.2 --dec 0.01")
-  , ((modMask              , xK_BackSpace ), spawn "xmonad --recompile && xmonad --restart")
+  , ((modMask              , xK_BackSpace ), spawn customRestart)
   , ((modMask,               xK_p         ), inputPrompt myXPConfig "pwsafe" ?+ myPwsafePrompt )
   , ((modMask,               xK_space     ), refresh)
   , ((modMask              , xK_x         ), shellPrompt myXPConfig)
   , ((modMask              , xK_q         ), kill)
   , ((modMask .|. shiftMask, xK_BackSpace ), io exitSuccess)
-  , ((modMask,               xK_s         ), spawn "/home/cgie/bin/solarizedtoggle")
+  , ((modMask,               xK_s         ), spawn toggleRestart)
   , ((modMask,               xK_t         ), withFocused $ windows . W.sink)
   , ((modMask .|. shiftMask, xK_a         ), setLayout $ XMonad.layoutHook conf)
   , ((modMask,               xK_a         ), sendMessage NextLayout)
@@ -226,7 +226,7 @@ myManageHook = namedScratchpadManageHook scratchpads <+> composeAll
   ]
 -----------------------------------------------------------------------
 -- dynamicLog format for dzen:
-
+--
 myDzenPP h s = namedScratchpadFilterOutWorkspacePP $ marshallPP s dzenPP
   { ppCurrent         = dzenColor S.base03 S.base00. pad
   , ppHidden          = dzenColor S.base2 "" . pad
@@ -240,8 +240,8 @@ myDzenPP h s = namedScratchpadFilterOutWorkspacePP $ marshallPP s dzenPP
   , ppSort            = fmap (. namedScratchpadFilterOutWorkspace) $ (mkWsSort getWsCompare')
   }
 -------------------------------------------------------------------------
----- This is needed for IndependentScreens which garbles the order of the
----- workspaces.
+-- This is needed for IndependentScreens which garbles the order of the
+-- workspaces.
 --
 getWsIndex' :: X (WorkspaceId -> Maybe Int)
 getWsIndex' = do
@@ -252,8 +252,17 @@ getWsCompare' :: X WorkspaceCompare
 getWsCompare' = do
     wsIndex <- getWsIndex'
     return $ mconcat [compare `on` wsIndex, compare]
--- main
 
+-------------------------------------------------------------------------
+-- Custom stuff
+
+customRestart = "m4 -DSOLARIZEDTHEME=$(cat /home/cgie/.solarizedstatus) /home/cgie/.xmonad/xmonad.m4 /home/cgie/.xmonad/xmonad.hs.in > /home/cgie/.xmonad/xmonad.hs && for pid in `pgrep dzen2`; do kill -9 $pid; done && xmonad --recompile && xmonad --restart"
+toggleRestart = "/home/cgie/bin/solarizedtoggle && for pid in `pgrep dzen2`; do kill -9 $pid; done && xmonad --recompile && xmonad --restart"
+
+
+-------------------------------------------------------------------------
+-- main
+--
 main = do
   nScreens <- countScreens
   handles <- mapM (spawnPipe . dzenCommand) [1 .. nScreens]
