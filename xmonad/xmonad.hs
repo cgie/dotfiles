@@ -1,0 +1,1 @@
+/home/cgie/dotfiles/host-spock/xmonad/xmonad.hs
