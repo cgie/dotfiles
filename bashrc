@@ -104,6 +104,7 @@ alias md='mkdir'
 alias ls='ls --group-directories-first --color=auto'
 alias df='df -h'
 alias du='du -h'
+alias grep='grep --color=auto'
 alias pfeh='feh -drZFD0.75' # fullscreen slideshow
 alias mplayer='mplayerwrap' # see above
 alias mfast='mplayerwrap -lavdopts skipframe=nonref:skiploopfilter=all'

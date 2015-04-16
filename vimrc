@@ -20,12 +20,13 @@ Bundle 'groenewege/vim-less'
 "Bundle 'jcfaria/Vim-R-plugin'
 "Bundle 'ervandew/screen'
 Bundle 'freitass/todo.txt-vim'
+Bundle 'scrooloose/nerdtree'
 
 
 syntax on
 
-let mapleader=" "
-let maplocalleader=" "
+let mapleader=","
+"let maplocalleader=" "
 
 function! MapToggle(key, opt)
   let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
@@ -51,6 +52,11 @@ nnoremap <silent><leader>h :set invhlsearch<CR>
 nnoremap <leader>n :bnext<CR>
 nnoremap <leader>p :bprev<CR>
 nnoremap <leader>d :bdelete<CR>
+
+silent! nmap <F2> :NERDTreeToggle<CR>
+let g:NERDTreeMapActivateNode="<F2>"
+
+
 
 let &colorcolumn=join(range(81,400),",")
 
@@ -84,7 +90,6 @@ set undolevels=1000
 set undoreload=10000
 set noswapfile
 
-highlight Comment cterm=italic
 filetype plugin indent on
 
 
@@ -103,6 +108,7 @@ if has("gui_running")
   set guioptions=e
 endif
 
+highlight Comment cterm=italic
 
 let g:runfile_by_type = {
     \ 'racket': '!racket %',
