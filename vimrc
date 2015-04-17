@@ -12,8 +12,8 @@ Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
 Bundle 'nickng/vim-scribble'
 "Bundle 'kchmck/vim-coffee-script'
-Bundle 'groenewege/vim-less'
-Bundle 'ldmud/ldmud-extensions/vim-less'
+"Bundle 'groenewege/vim-less'
+"Bundle 'ldmud/ldmud-extensions/vim-less'
 "Bundle 'suan/vim-instant-markdown'
 "Bundle 'aperezdc/vim-template'
 "Bundle 'vim-scripts/brainfuck-syntax.git'
@@ -89,9 +89,6 @@ set undolevels=1000
 set undoreload=10000
 set noswapfile
 
-filetype plugin indent on
-
-
 if $TERM =~ "-256color"
   set t_Co=256
 "  let &background = readfile('/home/cgie/.solarizedstatusforvim', '', 1)[0]
@@ -108,6 +105,7 @@ if has("gui_running")
 endif
 
 highlight Comment cterm=italic
+filetype plugin indent on
 
 let g:runfile_by_type = {
     \ 'racket': '!racket %',

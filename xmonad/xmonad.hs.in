@@ -1,4 +1,3 @@
-
 --------------------------------------------------------------------------------
 -- ~/.xmonad/xmonad.hs
 
@@ -28,7 +27,7 @@ import XMonad.Hooks.ManageHelpers
 import Data.List (elemIndex)
 import Data.Function (on)
 import XMonad.Util.WorkspaceCompare
-import qualified Solarized.Light as S
+import qualified Solarized.SOLARIZEDTHEME as S
 --------------------------------------------------------------------------------
 -- My Scratchpads
 
