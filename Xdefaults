@@ -16,11 +16,11 @@ Xcursor.theme: ArchCursorTheme
 ! urxvt
 ! ---------------------------------------------------------------------
 
-URxvt*font            : xft:Monofur for Powerline:regular:pixelsize=20
-URxvt*imFont          : xft:Monofur for Powerline:regular:pixelsize=20
-URxvt*boldFont        : xft:Monofur for Powerline:bold:pixelsize=20
-URxvt*italicFont      : xft:Monofur for Powerline:italic:pixelsize=20
-URxvt*boldItalicFont  : xft:Monofur for Powerline:bold:italic:pixelsize=20
+URxvt*font            : xft:Monofur for Powerline:regular:pixelsize=21
+URxvt*imFont          : xft:Monofur for Powerline:regular:pixelsize=21
+URxvt*boldFont        : xft:Monofur for Powerline:bold:pixelsize=21
+URxvt*italicFont      : xft:Monofur for Powerline:italic:pixelsize=21
+URxvt*boldItalicFont  : xft:Monofur for Powerline:bold:italic:pixelsize=21
 
 URxvt*buffered: false
 URxvt*scrollbars:	false
