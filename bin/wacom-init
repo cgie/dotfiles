@@ -9,7 +9,7 @@ xsetwacom --set "Wacom Intuos PT S Pad pad" Button 3 "key +ctrl +y -y -ctrl"
 
 # stylus
 
-xsetwacom set "Wacom Intuos PT S Pen stylus" "Area" "0 0 14720 9200"
+xsetwacom set "Wacom Intuos PT S Pen stylus" "Area" "0 0 21600 12150"
 xsetwacom set "Wacom Intuos PT S Pen stylus" "TabletDebugLevel" "0"
 xsetwacom set "Wacom Intuos PT S Pen stylus" "Suppress" "4"
 xsetwacom set "Wacom Intuos PT S Pen stylus" "RawSample" "2"
@@ -27,7 +27,7 @@ xsetwacom set "Wacom Intuos PT S Pen stylus" "BindToSerial" "0"
 
 # eraser
 
-xsetwacom set "Wacom Intuos PT S Pen eraser" "Area" "0 0 14720 9200"
+xsetwacom set "Wacom Intuos PT S Pen eraser" "Area" "0 0 21600 12150"
 xsetwacom set "Wacom Intuos PT S Pen eraser" "TabletDebugLevel" "0"
 xsetwacom set "Wacom Intuos PT S Pen eraser" "Suppress" "4"
 xsetwacom set "Wacom Intuos PT S Pen eraser" "RawSample" "2"
