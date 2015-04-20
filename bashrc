@@ -138,6 +138,11 @@ export GTK_IM_MODULE="xim"
 export MPD_HOST=alarmpi
 export MPD_PORT=6650
 
+export GPG_TTY=$(tty)
+export GPG_AGENT_INFO=""
+export GNUPGHOME=$HOME/.gnupg
+
+
 #source /etc/profile.d/apache-ant.sh
 
 
