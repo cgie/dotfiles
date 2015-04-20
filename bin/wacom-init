@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# The default value for area when plugging in the tablet is 0 0 15200 9500,
+# which means it has a ratio of 16:10. We simply change the second value to 9/10
+# of 9500 in order to get a ratio of 16:9.
+
 $HOME/bin/wacom-right # initialize the tablet on the right screen
 
 xsetwacom --set "Wacom Intuos PT S Pad pad" Button 1 "key +ctrl z -ctrl"
@@ -9,11 +13,11 @@ xsetwacom --set "Wacom Intuos PT S Pad pad" Button 3 "key +ctrl +y -y -ctrl"
 
 # stylus
 
-xsetwacom set "Wacom Intuos PT S Pen stylus" "Area" "0 0 21600 12150"
+xsetwacom set "Wacom Intuos PT S Pen stylus" "Area" "0 0 15200 8550"
 xsetwacom set "Wacom Intuos PT S Pen stylus" "TabletDebugLevel" "0"
 xsetwacom set "Wacom Intuos PT S Pen stylus" "Suppress" "4"
 xsetwacom set "Wacom Intuos PT S Pen stylus" "RawSample" "2"
-xsetwacom set "Wacom Intuos PT S Pen stylus" "PressureCurve" "0 0 100 100"
+#xsetwacom set "Wacom Intuos PT S Pen stylus" "PressureCurve" "0 0 100 100"
 xsetwacom set "Wacom Intuos PT S Pen stylus" "Mode" "Absolute"
 xsetwacom set "Wacom Intuos PT S Pen stylus" "TabletPCButton" "on"
 xsetwacom set "Wacom Intuos PT S Pen stylus" "Touch" "off"
@@ -27,11 +31,11 @@ xsetwacom set "Wacom Intuos PT S Pen stylus" "BindToSerial" "0"
 
 # eraser
 
-xsetwacom set "Wacom Intuos PT S Pen eraser" "Area" "0 0 21600 12150"
+xsetwacom set "Wacom Intuos PT S Pen eraser" "Area" "0 0 15200 8550"
 xsetwacom set "Wacom Intuos PT S Pen eraser" "TabletDebugLevel" "0"
 xsetwacom set "Wacom Intuos PT S Pen eraser" "Suppress" "4"
 xsetwacom set "Wacom Intuos PT S Pen eraser" "RawSample" "2"
-xsetwacom set "Wacom Intuos PT S Pen eraser" "PressureCurve" "5 10 90 95"
+#xsetwacom set "Wacom Intuos PT S Pen eraser" "PressureCurve" "5 10 90 95"
 xsetwacom set "Wacom Intuos PT S Pen eraser" "Mode" "Absolute"
 xsetwacom set "Wacom Intuos PT S Pen eraser" "Touch" "off"
 xsetwacom set "Wacom Intuos PT S Pen eraser" "Gesture" "off"
