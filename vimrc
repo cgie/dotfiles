@@ -28,7 +28,7 @@ Plugin 'tpope/vim-commentary'
 syntax on
 
 let mapleader=","
-"let maplocalleader=" "
+let maplocalleader=","
 
 function! MapToggle(key, opt)
   let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
