@@ -10,24 +10,26 @@ Plugin 'altercation/vim-colors-solarized'
 "Plugin 'pbrisbin/vim-runfile'
 Plugin 'bling/vim-airline'
 "Plugin 'tpope/vim-fugitive'
-Plugin 'nickng/vim-scribble'
+"Plugin 'nickng/vim-scribble'
 "Plugin 'kchmck/vim-coffee-script'
 "Plugin 'groenewege/vim-less'
 "Plugin 'ldmud/ldmud-extensions/vim-less'
 "Plugin 'suan/vim-instant-markdown'
 "Plugin 'aperezdc/vim-template'
 "Plugin 'vim-scripts/brainfuck-syntax.git'
-"Plugin 'jcfaria/Vim-R-plugin'
+Plugin 'jcfaria/Vim-R-plugin'
 "Plugin 'ervandew/screen'
 Plugin 'freitass/todo.txt-vim'
 "Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-surround'
+"Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
+Plugin 'SirVer/ultisnips'
+Plugin 'SirVer/vim-snippets'
 
 syntax on
 
-let mapleader=","
+let mapleader=" "
 let maplocalleader=","
 
 function! MapToggle(key, opt)
@@ -126,6 +128,11 @@ let g:airline#extensions#tabline#fnamemod = ':t:r'
 set laststatus=2
 
 let g:LatexBox_quickfix=2
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsListSnippets="<c-l>"
 
 set ttimeoutlen=50
 
