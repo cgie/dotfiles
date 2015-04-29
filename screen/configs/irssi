@@ -3,5 +3,5 @@ defbce "on"
 
 #screen -t mudnews   4 slrn -h ff.mud.de
 #screen -t news      5 slrn -h news.tng.de
-screen -t giessen.io 2 ssh giessen.io screen -Dr
-screen -t tf         1 tf
+screen -t giessen.io 2 ssh -t giessen.io screen -Dr
+screen -t alsamixer         1 alsamixer

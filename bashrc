@@ -163,7 +163,7 @@ alias mplayer='mplayerwrap' # see above
 alias mfast='mplayerwrap -lavdopts skipframe=nonref:skiploopfilter=all'
 alias tree='tree -C'
 alias myip='curl -s http://whatismyip.org/'
-alias irssi='SCREEN_CONF=irssi screen -S irssi -D -R irssi'
+alias giessen='SCREEN_CONF=giessen screen -S giessen -D -R giessen'
 alias update='yaourt -Syu --aur --no-confirm'
 alias tgz='tar -pczf'
 alias tbz2='tar -pcjf'
