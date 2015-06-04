@@ -4,6 +4,14 @@
 
 #include "/home/cgie/.solarized.xrdb"
 
+Xft.dpi: 96
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
 ! ---------------------------------------------------------------------
 ! Cursor Theme
 ! ---------------------------------------------------------------------
@@ -37,7 +45,7 @@ URxvt*matcher.button:	1
 URxvt*visualBell:	true
 !URxvt*depth:             32
 URxvt.perl-ext-common:  default,matcher,font-size
-URxvt.url-launcher:      /usr/bin/chromium
+URxvt.url-launcher:      /usr/bin/dwb
 URxvt.matcher.button:   1
 URxvt*shading:	0
 URxvt*internalBorder: 0

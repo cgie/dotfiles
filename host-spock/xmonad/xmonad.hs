@@ -135,7 +135,7 @@ myLayouts = avoidStruts $ smartBorders $  tiled ||| Mirror tiled ||| OneBig (3/4
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   [ ((modMask              , xK_r         ), spawn "urxvt")
-  , ((modMask,               xK_f         ), spawn "chromium")
+  , ((modMask,               xK_f         ), spawn "dwb")
   , ((modMask,               xK_F1        ), spawn "urxvt -e mutt")
   , ((modMask,               xK_F2        ), namedScratchpadAction scratchpads "cheat")
   , ((modMask,               xK_adiaeresis), namedScratchpadAction scratchpads "calc")
@@ -196,7 +196,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- mod-{w,e,r} %! Switch to physical/Xinerama screens 1, 2, or 3
   -- mod-shift-{w,e,r} %! Move client to screen 1, 2, or 3
   [((m .|. modMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
-      | (key, sc) <- zip [xK_KP_Insert, xK_KP_Delete] [0,1]
+      | (key, sc) <- zip [xK_m, xK_n] [0,1]
+      -- | (key, sc) <- zip [xK_KP_Insert, xK_KP_Delete] [0,1]
       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 -----------------------------------------------------------------------
 -- Mouse bindings:

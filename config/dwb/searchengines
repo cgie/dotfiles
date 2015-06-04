@@ -1,0 +1,8 @@
+g https://www.google.de/?gws_rd=ssl#q=XXX
+we https://en.wikipedia.org/w/index.php?search=XXX&title=Special:Search
+wd http://de.wikipedia.org/w/index.php?search=XXX&title=Spezial%3ASuche&go=Artikel
+wdd http://da.wikipedia.org/w/index.php?search=XXX&title=Speciel%3AS%C3%B8gning&go=G%C3%A5+til
+ddo http://ordnet.dk/ddo/ordbog?query=XXX
+imdb http://www.imdb.com/find?ref_=nv_sr_fn&q=XXX&s=all
+leo http://dict.leo.org/#/search=XXX&searchLoc=0&resultOrder=basic&multiwordShowSingle=on
+leo1 http://dict.leo.org/frde/index_de.html#/search=XXX&searchLoc=0&resultOrder=basic&multiwordShowSingle=on

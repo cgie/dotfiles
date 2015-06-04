@@ -134,7 +134,7 @@ myLayouts = avoidStruts $ smartBorders $  tiled ||| Mirror tiled ||| OneBig (3/4
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   [ ((modMask              , xK_r         ), spawn "urxvt")
-  , ((modMask,               xK_f         ), spawn "chromium")
+  , ((modMask,               xK_f         ), spawn "dwb")
   , ((modMask,               xK_F1        ), spawn "urxvt -e mutt")
   , ((modMask,               xK_F2        ), namedScratchpadAction scratchpads "cheat")
   , ((modMask,               xK_adiaeresis), namedScratchpadAction scratchpads "calc")

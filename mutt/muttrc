@@ -21,7 +21,7 @@ set spoolfile     = +INBOX            # new mails go here
 set mbox        = "+[Gmail].All Mail"
 set postponed   = "+[Gmail].Drafts"
 unset record
-set imap_delim_chars='/'
+#set imap_delim_chars='/'
 set mailcap_path      = ~/.mailcap
 
 mailboxes +INBOX
@@ -42,7 +42,8 @@ set metoo
 # Contacts
 # ------------------------------------------------------------------------------
 
-set query_command="goobook query '%s'"
+# set query_command="goobook query '%s'"
+set query_command="mu cfind --format=mutt-ab
 
 bind editor \t complete-query
 
@@ -54,12 +55,16 @@ macro index,pager gr \
   "!goobook reload\n" \
   "Goobook reload"
 
-macro index ,s \
-  "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
-  <shell-escape>notmuch-mutt -r --prompt search<enter>\
-  <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
-  <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
-  "notmuch: search mail"
+# macro index ,s \
+#   "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+#   <shell-escape>notmuch-mutt -r --prompt search<enter>\
+#   <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+#   <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+#   "notmuch: search mail"
+
+macro index ,s "<shell-escape>mu find --clearlinks --format=links --linksdir=~/.mu/results" "mu find"
+macro index ,z "<change-folder-readonly>~/.mu/results<enter>" "mu find results"
+
 
 # ------------------------------------------------------------------------------
 # Format Options
